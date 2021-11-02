@@ -10,6 +10,11 @@ namespace Cine_NT1_Grupo2.Context
     public class CineContext : DbContext
 
     {
+
+        public CineContext(DbContextOptions<CineContext> options) : base(options)
+        {
+        }
+
         public DbSet<Asiento> Asiento { get; set; }
         public DbSet<Cine> Cine { get; set; }
         

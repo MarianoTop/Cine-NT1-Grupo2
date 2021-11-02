@@ -34,7 +34,7 @@ namespace Cine_NT1_Grupo2
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddDbContext<CineContext>(options => options.UseSqlServer(Configuration["ConnectionString:EscuelaDBConnection"]));
+            services.AddDbContext<CineContext>(options => options.UseSqlServer(Configuration["ConnectionString:CineBDConnection"]));
             services.AddMvc().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }

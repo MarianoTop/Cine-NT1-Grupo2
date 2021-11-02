@@ -6,6 +6,8 @@ namespace Cine_NT1_Grupo2.Models
 {
     public class Funcion
     {
+
+        public int Id { get; set; }
         public Pelicula Pelicula { get; set; }
         public List<Asiento> Asientos { get; set; }
         public  List<Entrada> EntradasDisponibles { get; set; }
@@ -13,7 +15,7 @@ namespace Cine_NT1_Grupo2.Models
         public  double Hora { get; set; }
         public  int Sala { get; set; }
 
-        public String FuncionId { get; set; }
+     
 
 
         /*

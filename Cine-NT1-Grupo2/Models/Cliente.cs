@@ -8,10 +8,11 @@ namespace Cine_NT1_Grupo2.Models
     {
 
         public int id { get; set; }
-        public string nombre { get;set;}
-        public string apellido { get; set; }
+        public string Nombre { get;set;}
+        public string Apellido { get; set; }
 
-       
+        public string Mail { get; set; }
+
         public string ClienteId { get; set; }
         public string pass { get; set; }
         public List<Entrada> entradas { get; set; }

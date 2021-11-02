@@ -7,10 +7,11 @@ namespace Cine_NT1_Grupo2.Models
   public  class Cine
     {
 
-        public string CineId { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
         public Cliente ClienteActual { get;  set; }
-        public List<Cliente> clientes { get; set; }
-        public List<Funcion> funciones { get; set; }
+        public List<Cliente> Clientes { get; set; }
+        public List<Funcion> Funciones { get; set; }
 
 
         /*

@@ -8,7 +8,7 @@ namespace Cine_NT1_Grupo2.Models
     public class Asiento
     {
 
-        public string AsientoId { get; set; }
+        public int Id { get; set; }
         public char Fila { get; set; }
         public int Numero { get; set; }
 

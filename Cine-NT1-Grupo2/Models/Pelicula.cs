@@ -7,7 +7,9 @@ namespace Cine_NT1_Grupo2.Models
    public class Pelicula
     {
 
-        public string PeliculaId { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        
         public Calificacion Calificacion { get; set; }
         public Genero Genero { get; set; }
 
