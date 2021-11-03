@@ -1,20 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
 {
   public  class Cliente
     {
-
+        [Required]
         public int id { get; set; }
+
+        [Required(ErrorMessage = "El nombre es requerido"), MaxLength(20)]
         public string Nombre { get;set;}
+
+        [Required(ErrorMessage = "El Apellido es requerido"), MaxLength(20)]
         public string Apellido { get; set; }
 
+        [Required(ErrorMessage = "El mail es requerido"), MaxLength(20)]
         public string Mail { get; set; }
 
-       
+        [Required(ErrorMessage = "La contraseña es requerida"), MaxLength(20)]
+        [Display(Name = "Contraseña")]
         public string pass { get; set; }
+
+        // Aca no se si iria un notation...
         public List<Entrada> entradas { get; set; }
         public List<Tarjeta> tarjetas{ get; set; }
 

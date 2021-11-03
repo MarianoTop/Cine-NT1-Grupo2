@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
@@ -8,6 +9,7 @@ namespace Cine_NT1_Grupo2.Models
     {
 
         public int Id { get; set; }
+        [Required(ErrorMessage ="Ingrese el nombre del cine")]
         public string Nombre { get; set; }
         public Cliente ClienteActual { get;  set; }
         public List<Cliente> Clientes { get; set; }

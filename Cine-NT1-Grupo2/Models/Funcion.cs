@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
 {
     public class Funcion
     {
-
+        [Required]
         public int Id { get; set; }
         public Pelicula Pelicula { get; set; }
         public List<Asiento> Asientos { get; set; }
         public  List<Entrada> EntradasDisponibles { get; set; }
+
+        [Required (ErrorMessage ="Por favor, seleccione una fecha")]
         public  DateTime Fecha { get; set; }
-        
+
+        [Required(ErrorMessage = "Por favor, seleccione una sala")]
         public  int Sala { get; set; }
 
      
