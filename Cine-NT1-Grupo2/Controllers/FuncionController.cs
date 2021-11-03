@@ -54,7 +54,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fecha,Hora,Sala")] Funcion funcion)
+        public async Task<IActionResult> Create([Bind("Id,Fecha,Sala")] Funcion funcion)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Hora,Sala")] Funcion funcion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Sala")] Funcion funcion)
         {
             if (id != funcion.Id)
             {

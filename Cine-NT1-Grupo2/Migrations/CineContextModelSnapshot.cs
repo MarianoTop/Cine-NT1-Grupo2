@@ -132,9 +132,6 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Hora")
-                        .HasColumnType("float");
-
                     b.Property<int?>("PeliculaId")
                         .HasColumnType("int");
 

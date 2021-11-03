@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cine_NT1_Grupo2.Migrations
 {
     [DbContext(typeof(CineContext))]
-    [Migration("20211103220848_MigracionUno")]
-    partial class MigracionUno
+    [Migration("20211103222340_MigracionNumeroUno")]
+    partial class MigracionNumeroUno
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -133,9 +133,6 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
-
-                    b.Property<double>("Hora")
-                        .HasColumnType("float");
 
                     b.Property<int?>("PeliculaId")
                         .HasColumnType("int");

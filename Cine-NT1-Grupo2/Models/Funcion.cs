@@ -12,7 +12,7 @@ namespace Cine_NT1_Grupo2.Models
         public List<Asiento> Asientos { get; set; }
         public  List<Entrada> EntradasDisponibles { get; set; }
         public  DateTime Fecha { get; set; }
-        public  double Hora { get; set; }
+        
         public  int Sala { get; set; }
 
      
