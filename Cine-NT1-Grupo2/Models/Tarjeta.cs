@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
 {
-    public abstract class Tarjeta 
+    public class Tarjeta 
     {
         public int Id { get; set; }
         public DateTime FechaDeVencimiento { get; set; }

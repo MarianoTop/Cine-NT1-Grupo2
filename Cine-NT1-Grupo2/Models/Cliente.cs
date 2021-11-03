@@ -13,7 +13,7 @@ namespace Cine_NT1_Grupo2.Models
 
         public string Mail { get; set; }
 
-        public string ClienteId { get; set; }
+       
         public string pass { get; set; }
         public List<Entrada> entradas { get; set; }
         public List<Tarjeta> tarjetas{ get; set; }
