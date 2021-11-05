@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cine_NT1_Grupo2.Migrations
 {
-    public partial class CineBaseDeDatos : Migration
+    public partial class MigracionNumeroUno : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,7 +46,6 @@ namespace Cine_NT1_Grupo2.Migrations
                     Nombre = table.Column<string>(nullable: true),
                     Apellido = table.Column<string>(nullable: true),
                     Mail = table.Column<string>(nullable: true),
-                    ClienteId = table.Column<string>(nullable: true),
                     pass = table.Column<string>(nullable: true),
                     CineId = table.Column<int>(nullable: true)
                 },
@@ -84,9 +83,7 @@ namespace Cine_NT1_Grupo2.Migrations
                     FechaDeVencimiento = table.Column<DateTime>(nullable: false),
                     CodigoSeguridad = table.Column<int>(nullable: false),
                     Nombre = table.Column<string>(nullable: true),
-                    Clienteid = table.Column<int>(nullable: true),
-                    Discriminator = table.Column<string>(nullable: false),
-                    cantidadCuotas = table.Column<int>(nullable: true)
+                    Clienteid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -107,7 +104,6 @@ namespace Cine_NT1_Grupo2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PeliculaId = table.Column<int>(nullable: true),
                     Fecha = table.Column<DateTime>(nullable: false),
-                    Hora = table.Column<double>(nullable: false),
                     Sala = table.Column<int>(nullable: false),
                     CineId = table.Column<int>(nullable: true)
                 },

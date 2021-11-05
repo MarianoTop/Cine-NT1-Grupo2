@@ -19,9 +19,7 @@ namespace Cine_NT1_Grupo2.Context
         public DbSet<Cine> Cine { get; set; }
         
         public DbSet<Cliente> Cliente { get; set; }
-        public DbSet<Credito> Credito { get; set; }
-        public DbSet<Debito> Debito { get; set; }
-
+   
         public DbSet<Entrada> Entrada { get; set; }
         public DbSet<Funcion> Funcion { get; set; }
 

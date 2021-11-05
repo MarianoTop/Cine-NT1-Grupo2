@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
 {
-    public abstract class Tarjeta 
+    public class Tarjeta 
     {
+        [Required]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Por favor, ingrese la fecha de vencimiento de su tarjeta")]
         public DateTime FechaDeVencimiento { get; set; }
+
+        [Required(ErrorMessage = "Por favor, ingrese su codigo de seguridad")]
         public int CodigoSeguridad { get; set; }
+
+        [Required(ErrorMessage = "Por favor, ingrese el nombre del titular de la tarjeta"), MaxLength(30)]
         public string Nombre { get; set; } 
         /*
        private int numero;

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cine_NT1_Grupo2.Models.Credito>
+﻿@model IEnumerable<Cine_NT1_Grupo2.Models.Cine>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,15 +13,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.cantidadCuotas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaDeVencimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CodigoSeguridad)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th></th>
@@ -30,15 +21,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.cantidadCuotas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaDeVencimiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodigoSeguridad)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>

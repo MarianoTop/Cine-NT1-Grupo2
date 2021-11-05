@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
 {
    public class Pelicula
     {
-
+    
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Por favor, ingrese el nombre de la pelicula"),MaxLength(30)]
         public string Nombre { get; set; }
-        
+
+        [Required(ErrorMessage = "Por favor, seleccione una calificacion")]
         public Calificacion Calificacion { get; set; }
+
+        [Required(ErrorMessage = "Por favor, ingrese el tipo de genero")]
         public Genero Genero { get; set; }
 
         /*

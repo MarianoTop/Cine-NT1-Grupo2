@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
 {
    public class Entrada
     {
+
+        [Required]
         public int EntradaId { get; set; }
+
+        [Required]
         public Funcion Funcion { get; set; }
+
+        [Required]
         public Asiento Asiento { get; set; }
         /*
         public Entrada(Funcion f, Asiento a)

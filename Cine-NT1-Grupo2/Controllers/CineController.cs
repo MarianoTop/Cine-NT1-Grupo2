@@ -10,22 +10,22 @@ using Cine_NT1_Grupo2.Models;
 
 namespace Cine_NT1_Grupo2.Controllers
 {
-    public class CreditoController : Controller
+    public class CineController : Controller
     {
         private readonly CineContext _context;
 
-        public CreditoController(CineContext context)
+        public CineController(CineContext context)
         {
             _context = context;
         }
 
-        // GET: Credito
+        // GET: Cine
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Credito.ToListAsync());
+            return View(await _context.Cine.ToListAsync());
         }
 
-        // GET: Credito/Details/5
+        // GET: Cine/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Cine_NT1_Grupo2.Controllers
                 return NotFound();
             }
 
-            var credito = await _context.Credito
+            var cine = await _context.Cine
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (credito == null)
+            if (cine == null)
             {
                 return NotFound();
             }
 
-            return View(credito);
+            return View(cine);
         }
 
-        // GET: Credito/Create
+        // GET: Cine/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Credito/Create
+        // POST: Cine/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("cantidadCuotas,Id,FechaDeVencimiento,CodigoSeguridad,Nombre")] Credito credito)
+        public async Task<IActionResult> Create([Bind("Id,Nombre")] Cine cine)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(credito);
+                _context.Add(cine);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(credito);
+            return View(cine);
         }
 
-        // GET: Credito/Edit/5
+        // GET: Cine/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Cine_NT1_Grupo2.Controllers
                 return NotFound();
             }
 
-            var credito = await _context.Credito.FindAsync(id);
-            if (credito == null)
+            var cine = await _context.Cine.FindAsync(id);
+            if (cine == null)
             {
                 return NotFound();
             }
-            return View(credito);
+            return View(cine);
         }
 
-        // POST: Credito/Edit/5
+        // POST: Cine/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("cantidadCuotas,Id,FechaDeVencimiento,CodigoSeguridad,Nombre")] Credito credito)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] Cine cine)
         {
-            if (id != credito.Id)
+            if (id != cine.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Cine_NT1_Grupo2.Controllers
             {
                 try
                 {
-                    _context.Update(credito);
+                    _context.Update(cine);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CreditoExists(credito.Id))
+                    if (!CineExists(cine.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Cine_NT1_Grupo2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(credito);
+            return View(cine);
         }
 
-        // GET: Credito/Delete/5
+        // GET: Cine/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace Cine_NT1_Grupo2.Controllers
                 return NotFound();
             }
 
-            var credito = await _context.Credito
+            var cine = await _context.Cine
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (credito == null)
+            if (cine == null)
             {
                 return NotFound();
             }
 
-            return View(credito);
+            return View(cine);
         }
 
-        // POST: Credito/Delete/5
+        // POST: Cine/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var credito = await _context.Credito.FindAsync(id);
-            _context.Credito.Remove(credito);
+            var cine = await _context.Cine.FindAsync(id);
+            _context.Cine.Remove(cine);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CreditoExists(int id)
+        private bool CineExists(int id)
         {
-            return _context.Credito.Any(e => e.Id == id);
+            return _context.Cine.Any(e => e.Id == id);
         }
     }
 }

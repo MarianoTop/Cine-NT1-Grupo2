@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cine_NT1_Grupo2.Migrations
 {
     [DbContext(typeof(CineContext))]
-    [Migration("20211102030730_CineBaseDeDatos")]
-    partial class CineBaseDeDatos
+    [Migration("20211103222340_MigracionNumeroUno")]
+    partial class MigracionNumeroUno
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -78,9 +78,6 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.Property<int?>("CineId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ClienteId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Mail")
                         .HasColumnType("nvarchar(max)");
 
@@ -137,9 +134,6 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Hora")
-                        .HasColumnType("float");
-
                     b.Property<int?>("PeliculaId")
                         .HasColumnType("int");
 
@@ -189,10 +183,6 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.Property<int>("CodigoSeguridad")
                         .HasColumnType("int");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("FechaDeVencimiento")
                         .HasColumnType("datetime2");
 
@@ -204,25 +194,6 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.HasIndex("Clienteid");
 
                     b.ToTable("Tarjeta");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Tarjeta");
-                });
-
-            modelBuilder.Entity("Cine_NT1_Grupo2.Models.Credito", b =>
-                {
-                    b.HasBaseType("Cine_NT1_Grupo2.Models.Tarjeta");
-
-                    b.Property<int>("cantidadCuotas")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Credito");
-                });
-
-            modelBuilder.Entity("Cine_NT1_Grupo2.Models.Debito", b =>
-                {
-                    b.HasBaseType("Cine_NT1_Grupo2.Models.Tarjeta");
-
-                    b.HasDiscriminator().HasValue("Debito");
                 });
 
             modelBuilder.Entity("Cine_NT1_Grupo2.Models.Asiento", b =>
