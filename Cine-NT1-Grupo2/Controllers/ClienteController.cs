@@ -58,6 +58,14 @@ namespace Cine_NT1_Grupo2.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Vamos a chequear si el mail existe
+                bool mailExiste = _context.Cliente.Any(c => c.Mail == cliente.Mail);
+
+                if (mailExiste)
+                {
+                    return View(cliente);
+                }
+
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

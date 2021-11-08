@@ -46,6 +46,20 @@ namespace Cine_NT1_Grupo2.Controllers
         // GET: Entrada/Create
         public IActionResult Create()
         {
+
+            /*
+            var selectResult = from s in _context.Funcion
+                               select s.Pelicula;
+            */
+
+            var entradasAElegir = _context.Funcion.Include(funcion => funcion.Pelicula).ToList();
+            ViewBag.Funciones = (from item in entradasAElegir 
+                                 select new SelectListItem
+                                 {
+                                     Text= item.Pelicula.Nombre,
+                                     Value= item.Pelicula.Id.ToString()
+                                 }
+                );
             return View();
         }
 
