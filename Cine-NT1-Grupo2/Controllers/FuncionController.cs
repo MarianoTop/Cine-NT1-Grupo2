@@ -60,7 +60,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fecha,Sala")] Funcion funcion)
+        public async Task<IActionResult> Create([Bind("Id,Fecha,Sala,Pelicula")] Funcion funcion)
         {
             if (ModelState.IsValid)
             {
