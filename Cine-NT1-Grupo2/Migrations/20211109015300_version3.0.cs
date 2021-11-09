@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cine_NT1_Grupo2.Migrations
 {
-    public partial class MigracionNumeroUno : Migration
+    public partial class version30 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: true),
+                    Nombre = table.Column<string>(maxLength: 30, nullable: false),
                     Calificacion = table.Column<int>(nullable: false),
                     Genero = table.Column<int>(nullable: false)
                 },
@@ -28,8 +28,8 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     EntradaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FuncionId = table.Column<int>(nullable: true),
-                    AsientoId = table.Column<int>(nullable: true),
+                    FuncionId = table.Column<int>(nullable: false),
+                    AsientoId = table.Column<int>(nullable: false),
                     Clienteid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -43,10 +43,10 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: true),
-                    Apellido = table.Column<string>(nullable: true),
-                    Mail = table.Column<string>(nullable: true),
-                    pass = table.Column<string>(nullable: true),
+                    Nombre = table.Column<string>(maxLength: 20, nullable: false),
+                    Apellido = table.Column<string>(maxLength: 20, nullable: false),
+                    Mail = table.Column<string>(maxLength: 20, nullable: false),
+                    pass = table.Column<string>(maxLength: 20, nullable: false),
                     CineId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -60,7 +60,7 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: true),
+                    Nombre = table.Column<string>(nullable: false),
                     ClienteActualid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -82,7 +82,7 @@ namespace Cine_NT1_Grupo2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FechaDeVencimiento = table.Column<DateTime>(nullable: false),
                     CodigoSeguridad = table.Column<int>(nullable: false),
-                    Nombre = table.Column<string>(nullable: true),
+                    Nombre = table.Column<string>(maxLength: 30, nullable: false),
                     Clienteid = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -102,7 +102,7 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PeliculaId = table.Column<int>(nullable: true),
+                    IdPelicula = table.Column<int>(nullable: false),
                     Fecha = table.Column<DateTime>(nullable: false),
                     Sala = table.Column<int>(nullable: false),
                     CineId = table.Column<int>(nullable: true)
@@ -117,11 +117,11 @@ namespace Cine_NT1_Grupo2.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Funcion_Pelicula_PeliculaId",
-                        column: x => x.PeliculaId,
+                        name: "FK_Funcion_Pelicula_IdPelicula",
+                        column: x => x.IdPelicula,
                         principalTable: "Pelicula",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,9 +181,9 @@ namespace Cine_NT1_Grupo2.Migrations
                 column: "CineId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Funcion_PeliculaId",
+                name: "IX_Funcion_IdPelicula",
                 table: "Funcion",
-                column: "PeliculaId");
+                column: "IdPelicula");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tarjeta_Clienteid",
@@ -196,7 +196,7 @@ namespace Cine_NT1_Grupo2.Migrations
                 column: "FuncionId",
                 principalTable: "Funcion",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Entrada_Cliente_Clienteid",
@@ -212,7 +212,7 @@ namespace Cine_NT1_Grupo2.Migrations
                 column: "AsientoId",
                 principalTable: "Asiento",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Cliente_Cine_CineId",

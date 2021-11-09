@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cine_NT1_Grupo2.Migrations
 {
     [DbContext(typeof(CineContext))]
-    [Migration("20211102160202_fedeBaseDeDatos")]
-    partial class fedeBaseDeDatos
+    [Migration("20211109015300_version3.0")]
+    partial class version30
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,6 +56,7 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -73,22 +74,27 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int?>("CineId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ClienteId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Mail")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("pass")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.HasKey("id");
 
@@ -104,13 +110,13 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AsientoId")
+                    b.Property<int>("AsientoId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Clienteid")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FuncionId")
+                    b.Property<int>("FuncionId")
                         .HasColumnType("int");
 
                     b.HasKey("EntradaId");
@@ -137,10 +143,7 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Hora")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("PeliculaId")
+                    b.Property<int>("IdPelicula")
                         .HasColumnType("int");
 
                     b.Property<int>("Sala")
@@ -150,7 +153,7 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasIndex("CineId");
 
-                    b.HasIndex("PeliculaId");
+                    b.HasIndex("IdPelicula");
 
                     b.ToTable("Funcion");
                 });
@@ -169,7 +172,9 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
@@ -189,40 +194,19 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.Property<int>("CodigoSeguridad")
                         .HasColumnType("int");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("FechaDeVencimiento")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
                     b.HasIndex("Clienteid");
 
                     b.ToTable("Tarjeta");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Tarjeta");
-                });
-
-            modelBuilder.Entity("Cine_NT1_Grupo2.Models.Credito", b =>
-                {
-                    b.HasBaseType("Cine_NT1_Grupo2.Models.Tarjeta");
-
-                    b.Property<int>("cantidadCuotas")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Credito");
-                });
-
-            modelBuilder.Entity("Cine_NT1_Grupo2.Models.Debito", b =>
-                {
-                    b.HasBaseType("Cine_NT1_Grupo2.Models.Tarjeta");
-
-                    b.HasDiscriminator().HasValue("Debito");
                 });
 
             modelBuilder.Entity("Cine_NT1_Grupo2.Models.Asiento", b =>
@@ -250,7 +234,9 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     b.HasOne("Cine_NT1_Grupo2.Models.Asiento", "Asiento")
                         .WithMany()
-                        .HasForeignKey("AsientoId");
+                        .HasForeignKey("AsientoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Cine_NT1_Grupo2.Models.Cliente", null)
                         .WithMany("entradas")
@@ -258,7 +244,9 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasOne("Cine_NT1_Grupo2.Models.Funcion", "Funcion")
                         .WithMany("EntradasDisponibles")
-                        .HasForeignKey("FuncionId");
+                        .HasForeignKey("FuncionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cine_NT1_Grupo2.Models.Funcion", b =>
@@ -269,7 +257,9 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasOne("Cine_NT1_Grupo2.Models.Pelicula", "Pelicula")
                         .WithMany()
-                        .HasForeignKey("PeliculaId");
+                        .HasForeignKey("IdPelicula")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cine_NT1_Grupo2.Models.Tarjeta", b =>

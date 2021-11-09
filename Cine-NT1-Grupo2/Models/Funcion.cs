@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
@@ -9,9 +10,10 @@ namespace Cine_NT1_Grupo2.Models
     {
         [Required]
         public int Id { get; set; }
-        public Pelicula Pelicula { get; set; }
-
+       
+        [ForeignKey(nameof(Pelicula))]
         public int IdPelicula { get; set; }
+        public Pelicula Pelicula { get; set; }
         public List<Asiento> Asientos { get; set; }
         public  List<Entrada> EntradasDisponibles { get; set; }
 

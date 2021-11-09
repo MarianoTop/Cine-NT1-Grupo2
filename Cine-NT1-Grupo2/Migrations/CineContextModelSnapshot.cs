@@ -144,9 +144,6 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.Property<int>("IdPelicula")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PeliculaId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Sala")
                         .HasColumnType("int");
 
@@ -154,7 +151,7 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasIndex("CineId");
 
-                    b.HasIndex("PeliculaId");
+                    b.HasIndex("IdPelicula");
 
                     b.ToTable("Funcion");
                 });
@@ -258,7 +255,9 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasOne("Cine_NT1_Grupo2.Models.Pelicula", "Pelicula")
                         .WithMany()
-                        .HasForeignKey("PeliculaId");
+                        .HasForeignKey("IdPelicula")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cine_NT1_Grupo2.Models.Tarjeta", b =>
