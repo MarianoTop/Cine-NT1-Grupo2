@@ -10,6 +10,8 @@ namespace Cine_NT1_Grupo2.Models
         [Required]
         public int Id { get; set; }
         public Pelicula Pelicula { get; set; }
+
+        public int IdPelicula { get; set; }
         public List<Asiento> Asientos { get; set; }
         public  List<Entrada> EntradasDisponibles { get; set; }
 
