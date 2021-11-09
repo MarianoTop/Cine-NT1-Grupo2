@@ -61,7 +61,7 @@ namespace Cine_NT1_Grupo2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         /*  Aca se agregan los elementos necesarios*/
-        public async Task<IActionResult> Create([Bind("Id,PeliculaId,Fecha,Sala,IdPelicula")] Funcion funcion)
+        public async Task<IActionResult> Create([Bind("Id,Fecha,Sala,IdPelicula")] Funcion funcion)
         {
             
 
