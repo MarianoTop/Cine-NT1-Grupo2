@@ -137,8 +137,8 @@ namespace Cine_NT1_Grupo2.Controllers
             {
                 return NotFound();
             }
-
-            var funcion = await _context.Funcion
+            /*Modifico la consulta para buscar el nombre de la pelicula */
+            var funcion = await _context.Funcion.Include(funcion => funcion.Pelicula)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (funcion == null)
             {
