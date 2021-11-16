@@ -18,7 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Sala)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pelicula)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +31,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Sala)
+            </td>
+            <td>
+                @* Aca deberia verse el nombre, use un include en el controller para obtener los datos faltantes*@
+                @Html.DisplayFor(modelItem => item.Pelicula.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

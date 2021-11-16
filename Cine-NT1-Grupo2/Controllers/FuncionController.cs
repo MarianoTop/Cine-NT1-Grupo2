@@ -22,7 +22,12 @@ namespace Cine_NT1_Grupo2.Controllers
         // GET: Funcion
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Funcion.ToListAsync());
+            // El include permite hacer un join entre distintas tablas.. example. Estimo que automaticamente une las keys para obtener el nombre?
+
+            /*https://www.it-swarm-es.com/es/sql/que-hace-include-en-linq/1048745635/ */
+            return View(await _context.Funcion
+                .Include(funcion => funcion.Pelicula)
+                 .ToListAsync());
         }
 
         // GET: Funcion/Details/5
@@ -32,8 +37,8 @@ namespace Cine_NT1_Grupo2.Controllers
             {
                 return NotFound();
             }
-
-            var funcion = await _context.Funcion
+            // Aca hago lo mismo. un join con Pelicula.
+            var funcion = await _context.Funcion.Include(funcion => funcion.Pelicula)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (funcion == null)
             {
