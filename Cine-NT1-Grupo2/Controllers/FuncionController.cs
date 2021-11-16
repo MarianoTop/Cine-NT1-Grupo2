@@ -86,12 +86,18 @@ namespace Cine_NT1_Grupo2.Controllers
             {
                 return NotFound();
             }
-
+            /* Que pasaria si hago un include en vez de un view bag? estaria bien , trate pero envia error*/
             var funcion = await _context.Funcion.FindAsync(id);
             if (funcion == null)
             {
                 return NotFound();
             }
+
+            var entradasAElegir = from s in _context.Pelicula
+                                  select s;
+
+            ViewBag.FuncionesPelis = new SelectList(entradasAElegir.ToList(), "Id", "Nombre");
+
             return View(funcion);
         }
 
@@ -100,7 +106,8 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Sala")] Funcion funcion)
+        /* Modificado para que pida el IdPelicula */
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Sala,IdPelicula")] Funcion funcion)
         {
             if (id != funcion.Id)
             {

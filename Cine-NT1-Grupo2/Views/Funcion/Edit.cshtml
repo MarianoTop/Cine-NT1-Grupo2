@@ -23,6 +23,12 @@
                 <input asp-for="Sala" class="form-control" />
                 <span asp-validation-for="Sala" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="Pelicula" class="control-label"></label>
+                @Html.DropDownList("IdPelicula", ViewBag.FuncionesPelis as SelectList)
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
