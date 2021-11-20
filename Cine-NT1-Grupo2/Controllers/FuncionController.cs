@@ -75,9 +75,9 @@ namespace Cine_NT1_Grupo2.Controllers
                 _context.Add(funcion);
 
                 /* Aca deberia encontrar como agregar asientos , ¿como podre indicarle el ID de mi funcion?*/
+                await _context.SaveChangesAsync();
 
-           
-               
+
 
                 for ( char fila='A'; fila < 'E'; fila++)
                 {
@@ -86,7 +86,8 @@ namespace Cine_NT1_Grupo2.Controllers
                         Asiento asiento = new Asiento();
                         asiento.Fila = fila;
                         asiento.Numero = numero;
-                       
+                        asiento.FuncionId = funcion.Id;
+                     
                         _context.Add(asiento);
                     }
 
