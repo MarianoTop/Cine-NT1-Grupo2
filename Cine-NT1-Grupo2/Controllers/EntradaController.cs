@@ -167,7 +167,7 @@ namespace Cine_NT1_Grupo2.Controllers
 
 
         /*Este metodo deberia pasar un id de peli y traer todas las fechas posibles 
-         
+         Notar que el nombre del parametro debe coincidir con lo que se le envio del viewbag
          */ 
         public async Task<IActionResult> SelectFecha(int? IdPelicula)
         {
@@ -187,6 +187,32 @@ namespace Cine_NT1_Grupo2.Controllers
                          select s;
 
             ViewBag.FechasPelis = new SelectList(fechas.ToList(), "Id", "Fecha");
+
+            return View();
+        }
+
+
+        /*El siguiente metodo tiene por objetivo enviar los asientos de la funcion seleccionada */
+
+        public async Task<IActionResult> SelectAsiento(int? IdFuncion)
+        {
+            if (IdFuncion == null)
+            {
+                return NotFound();
+            }
+
+            var funcion = await _context.Funcion.FindAsync(IdFuncion);
+            if (funcion == null)
+            {
+                return NotFound();
+            }
+
+            var asientos = from s in _context.Funcion
+                         where s.Id == IdFuncion
+                         select s;
+            /*Complicado, como le devuelvo el asiento directamente sin Fila y Numero */
+
+            ViewBag.FechasPelis = new SelectList(asientos.ToList(), "Id", "Asiento");
 
             return View();
         }
