@@ -164,5 +164,30 @@ namespace Cine_NT1_Grupo2.Controllers
         {
             return _context.Entrada.Any(e => e.EntradaId == id);
         }
+
+
+        public async Task<IActionResult> SelectFecha(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+      
+            var pelicula = await _context.Pelicula.FindAsync(id);
+            if (pelicula == null)
+            {
+                return NotFound();
+            }
+
+            var fechas = from s in _context.Funcion
+                         where s.IdPelicula==id
+                                  select s;
+
+            ViewBag.FuncionesPelis = new SelectList(fechas.ToList(), "Id", "Fecha");
+
+            return View();
+        }
+
+
     }
 }
