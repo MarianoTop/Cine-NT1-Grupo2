@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,11 @@ namespace Cine_NT1_Grupo2.Models
         [Required]
         public int Numero { get; set; }
 
+
+        // relacion otra entidad
+
+        [ForeignKey(nameof(Funcion))]
+        public int FuncionId { get; set; }
 
 
         /*

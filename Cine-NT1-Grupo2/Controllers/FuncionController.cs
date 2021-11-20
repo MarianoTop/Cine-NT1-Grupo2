@@ -86,6 +86,7 @@ namespace Cine_NT1_Grupo2.Controllers
                         Asiento asiento = new Asiento();
                         asiento.Fila = fila;
                         asiento.Numero = numero;
+                       
                         _context.Add(asiento);
                     }
 
