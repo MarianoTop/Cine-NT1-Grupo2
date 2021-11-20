@@ -10,13 +10,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="SelectFecha">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             @*Html.DropDownListFor(m => m.Funcion, new SelectList(ViewBag.Funciones, "Value", "Text"))*@
 
-            
-            @Html.DropDownList("Nombre", ViewBag.FuncionesPelis as SelectList)
+
+            @Html.DropDownList("IdPelicula", ViewBag.FuncionesPelis as SelectList)
 
 
             <div class="form-group">

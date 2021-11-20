@@ -49,7 +49,7 @@ namespace Cine_NT1_Grupo2.Controllers
 
             var entradasAElegir = from s in _context.Pelicula
                                select s;
-          
+
             /* var entradasAElegir = _context.Funcion.Include(funcion => funcion.Pelicula).ToList();*/
             /*ViewBag.Funciones = (from item in entradasAElegir 
                                  select new SelectListItem
@@ -166,24 +166,27 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
 
-        public async Task<IActionResult> SelectFecha(int? id)
+        /*Este metodo deberia pasar un id de peli y traer todas las fechas posibles 
+         
+         */ 
+        public async Task<IActionResult> SelectFecha(int? IdPelicula)
         {
-            if (id == null)
+            if (IdPelicula == null)
             {
                 return NotFound();
             }
       
-            var pelicula = await _context.Pelicula.FindAsync(id);
+            var pelicula = await _context.Pelicula.FindAsync(IdPelicula);
             if (pelicula == null)
             {
                 return NotFound();
             }
 
             var fechas = from s in _context.Funcion
-                         where s.IdPelicula==id
-                                  select s;
+                         where s.IdPelicula== IdPelicula
+                         select s;
 
-            ViewBag.FuncionesPelis = new SelectList(fechas.ToList(), "Id", "Fecha");
+            ViewBag.FechasPelis = new SelectList(fechas.ToList(), "Id", "Fecha");
 
             return View();
         }
