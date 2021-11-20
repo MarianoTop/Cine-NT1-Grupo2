@@ -63,6 +63,14 @@ namespace Cine_NT1_Grupo2.Controllers
 
                 if (mailExiste)
                 {
+
+                    /* Agregar validaciones al model: ver 
+                     * https://desarrolloweb.com/articulos/validaciones-aspnet-mvc-donet.html
+                     */
+                    /*En el caso de que no queremos que se le asigne a una propiedad, debeboms poner simplemente ""
+                     * en el primer parametro. (ej , aqui donde dice Mail, iria ""*/
+                    ModelState.AddModelError("Mail", "Ya existe un usuario con este mail");
+
                     return View(cliente);
                 }
 
