@@ -206,36 +206,48 @@ namespace Cine_NT1_Grupo2.Controllers
             {
                 return NotFound();
             }
-          /*trate de usar first or default pero me devuelve un solo elemento */ 
+            /*trate de usar first or default pero me devuelve un solo elemento */
+            /* var asientosTotales = from s in _context.Funcion
+                                   where s.Id == IdFuncion
+                                   select s.Asientos;
+            */
+
+            /*Al final era mas sencillo hacerlo de la forma tradicional 
+             * https://www.tutorialsteacher.com/linq/linq-joining-operator-join
+             * */
+
+            /* creo que a futuro tendremos que crear un atributo para saber a quien le pertenece
+        * sino siempre va a devolver todos, ademas tendremos que preguntar si es !null o algo similar*/
+
             var asientosTotales = from s in _context.Funcion
+                                  join st in _context.Asiento
+                                  on s.Id equals st.FuncionId
                                   where s.Id == IdFuncion
-                                  select s.Asientos;
+                                  orderby st.Fila ascending, st.Numero ascending
+                                  select st;
 
 
-            /*Complicado, como le devuelvo el asiento directamente sin Fila y Numero */
-            /* Por otro lado creo que a futuro tendremos que crear un atributo para saber a quien le pertenece
-             * sino siempre va a volver*/
+          
+       
 
             /* Al ser una lista creo que se devuelve distinto*/
-            /* https://stackoverflow.com/questions/668589/how-can-i-add-an-item-to-a-selectlist-in-asp-net-mvc */
+            /* https://stackoverflow.com/questions/668589/how-can-i-add-an-item-to-a-selectlist-in-asp-net-mvc 
+             https://stackoverflow.com/questions/14663971/using-linq-select-list-inside-list
+             */
 
-            /* Por algun motivo entiende que se trata de una lista dentro de otra lista*/ 
 
             List<SelectListItem> listaAsientos = new List<SelectListItem>();
 
-            foreach(var  asiento in asientosTotales)
+            foreach(var  item in asientosTotales)
             {
 
-                foreach (var item in asiento)
+                listaAsientos.Add(new SelectListItem()
                 {
-                    listaAsientos.Add(new SelectListItem()
-                    {
-                        Text = item.Fila.ToString() + item.Numero.ToString(),
-                        Value = item.Id.ToString()
-                    });
-                }
+                    Text = item.Fila.ToString() + item.Numero.ToString(),
+                    Value = item.Id.ToString()
+                });
 
-               
+
             }
 
 
