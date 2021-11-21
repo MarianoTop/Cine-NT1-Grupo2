@@ -12,7 +12,8 @@
     <div class="col-md-4">
         <form asp-action="Create">
             @*Se le agrega la Id del model para que sea enviada por parametro*@
-            <input type="hidden" asp-for="Id" />
+            @*Se le agrega name para que se le envia con este nombre al model Create*@
+            <input type="hidden" asp-for="Id" name="FuncionId"/>
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
