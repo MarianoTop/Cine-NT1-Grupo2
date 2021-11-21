@@ -20,7 +20,7 @@ namespace Cine_NT1_Grupo2.Models
         [EmailAddress]
         public string Mail { get; set; }
 
-        [Required(ErrorMessage = "La contraseña es requerida"), MinLength(8) MaxLength(20)]
+        [Required(ErrorMessage = "La contraseña es requerida"), MinLength(8) ,MaxLength(20)]
         [Display(Name = "Contraseña")]
         
         public string pass { get; set; }

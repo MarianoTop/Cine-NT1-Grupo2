@@ -20,7 +20,7 @@ namespace Cine_NT1_Grupo2.Models
         [Required]
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
         [StringLength(2, ErrorMessage = "El número de Asiento es demasiado largo")]
-        [Range(1, 15) ErrorMessage = "solo se admiten numeros entre {1} y {2}]
+        [Range(1, 15 ,ErrorMessage = "solo se admiten numeros entre {1} y {2}")]
         public int Numero { get; set; }
 
 

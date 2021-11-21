@@ -17,12 +17,12 @@ namespace Cine_NT1_Grupo2.Models
 
         [Required(ErrorMessage = "Por favor, ingrese su codigo de seguridad")]
         [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
-        [Range(111, 999) ErrorMessage = "ingrese un codigo Valido entre {1} y {2}]
+        [Range(111, 999, ErrorMessage = "ingrese un codigo Valido entre {1} y {2}")]
         public int CodigoSeguridad { get; set; }
 
         //valida que el nombre sea en caracteres alfabeticos
         [Required(ErrorMessage = "Por favor, ingrese el nombre del titular de la tarjeta"), MaxLength(30)]
-        [RegularExpression("[a-zA-Z]",ErrorMessage="el campo {0} no admite numeros")
+        [RegularExpression("[a-zA-Z]",ErrorMessage="el campo {0} no admite numeros")]
         public string Nombre { get; set; } 
         /*
        private int numero;
