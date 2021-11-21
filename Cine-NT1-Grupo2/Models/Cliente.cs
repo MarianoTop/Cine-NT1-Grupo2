@@ -10,18 +10,25 @@ namespace Cine_NT1_Grupo2.Models
         [Required]
         public int id { get; set; }
 
-        [Required(ErrorMessage = "El nombre es requerido"), MaxLength(20)]
+        // chequea que los usuarios carguen sus datos completos y correctos, no admitiendo formatos de numeros en nombre
+        [Required(ErrorMessage = "El nombre es requerido, no admitimos usuarios Anonomios"), MaxLength(20)]
+        [RegularExpression("[a-zA-Z]", ErrorMessage = "el campo {0} no admite numeros")]
         public string Nombre { get;set;}
 
+        // el apellido debe estar con el campo completo y no admite numeros
         [Required(ErrorMessage = "El Apellido es requerido"), MaxLength(20)]
+        [RegularExpression("[a-zA-Z]", ErrorMessage = "el campo {0} no admite numeros")]
         public string Apellido { get; set; }
 
+        //el campo mail tiene formato valido de mail
         [Required(ErrorMessage = "El mail es requerido"), MaxLength(20)]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Debe ser un Mail con formato VALIDO")]
         public string Mail { get; set; }
 
+        // la contraseña requerida no solo debe cumplir con un minimo de caracteres sino que no puede superar un maximo de ellos
         [Required(ErrorMessage = "La contraseña es requerida"), MinLength(8) ,MaxLength(20)]
         [Display(Name = "Contraseña")]
+        
         
         public string pass { get; set; }
 
