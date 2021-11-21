@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cine_NT1_Grupo2.Migrations
 {
-    public partial class _10 : Migration
+    public partial class FKEntradas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

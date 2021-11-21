@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cine_NT1_Grupo2.Migrations
 {
     [DbContext(typeof(CineContext))]
-    [Migration("20211121190626_dd")]
-    partial class dd
+    [Migration("20211121193045_FKEntradas")]
+    partial class FKEntradas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,7 +112,7 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AsientoId")
+                    b.Property<int>("AsientoId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Clienteid")
@@ -238,7 +238,9 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     b.HasOne("Cine_NT1_Grupo2.Models.Asiento", "Asiento")
                         .WithMany()
-                        .HasForeignKey("AsientoId");
+                        .HasForeignKey("AsientoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Cine_NT1_Grupo2.Models.Cliente", null)
                         .WithMany("entradas")

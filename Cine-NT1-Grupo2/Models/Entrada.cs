@@ -12,7 +12,12 @@ namespace Cine_NT1_Grupo2.Models
         [Required]
         public int EntradaId { get; set; }
 
-    
+
+        /* No conozco bien las cuestiones de fondo, pero aparentemente se produjo un efecto cascada porque
+         hay muchas FK y si uno quisiera borrar el otro no lo permitiria por eso con ? permito que sea opcional
+        https://stackoverflow.com/questions/17127351/introducing-foreign-key-constraint-may-cause-cycles-or-multiple-cascade-paths*/
+        [ForeignKey(nameof(Funcion))]
+        public int? FuncionId { get; set; }
         public Funcion Funcion { get; set; }
 
         [ForeignKey(nameof(Asiento))]
