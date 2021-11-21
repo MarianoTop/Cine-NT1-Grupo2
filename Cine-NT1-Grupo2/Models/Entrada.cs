@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
@@ -14,7 +15,8 @@ namespace Cine_NT1_Grupo2.Models
     
         public Funcion Funcion { get; set; }
 
-     
+        [ForeignKey(nameof(Asiento))]
+        public int AsientoId { get; set; }
         public Asiento Asiento { get; set; }
         /*
         public Entrada(Funcion f, Asiento a)

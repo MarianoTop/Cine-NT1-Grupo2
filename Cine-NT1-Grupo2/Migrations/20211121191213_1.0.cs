@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cine_NT1_Grupo2.Migrations
 {
-    public partial class version30 : Migration
+    public partial class _10 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     EntradaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FuncionId = table.Column<int>(nullable: false),
+                    FuncionId = table.Column<int>(nullable: true),
                     AsientoId = table.Column<int>(nullable: false),
                     Clienteid = table.Column<int>(nullable: true)
                 },
@@ -130,9 +130,9 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Fila = table.Column<string>(nullable: false),
-                    Numero = table.Column<int>(nullable: false),
-                    FuncionId = table.Column<int>(nullable: true)
+                    Fila = table.Column<string>(maxLength: 1, nullable: false),
+                    Numero = table.Column<int>(maxLength: 2, nullable: false),
+                    FuncionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,7 +142,7 @@ namespace Cine_NT1_Grupo2.Migrations
                         column: x => x.FuncionId,
                         principalTable: "Funcion",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -196,7 +196,7 @@ namespace Cine_NT1_Grupo2.Migrations
                 column: "FuncionId",
                 principalTable: "Funcion",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Entrada_Cliente_Clienteid",
