@@ -11,11 +11,12 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*Se le agrega la Id del model para que sea enviada por parametro*@
             @*Se le agrega name para que se le envia con este nombre al model Create*@
-            <input type="hidden" asp-for="Id" name="FuncionId"/>
+            <input type="hidden" asp-for="Id" name="FuncionId" />
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 
 
             @Html.DropDownList("AsientoId", ViewBag.AsientoPeli as SelectList)
