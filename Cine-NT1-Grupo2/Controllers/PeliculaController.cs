@@ -58,6 +58,17 @@ namespace Cine_NT1_Grupo2.Controllers
         {
             if (ModelState.IsValid)
             {
+                //chequear si se repite el nombre de la pelicula para evitar cargarla dos veces
+
+                bool yaExiste = _context.Pelicula.Any(p => p.Nombre == pelicula.Nombre);
+
+                if (yaExiste)
+                {
+                    ModelState.AddModelError("Nombre", "La pelicula ya se encuentra Cargada en la Base de datos");
+
+                    return View(pelicula);
+                }
+
                 _context.Add(pelicula);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
