@@ -17,11 +17,16 @@ namespace Cine_NT1_Grupo2.Models
         public string Apellido { get; set; }
 
         [Required(ErrorMessage = "El mail es requerido"), MaxLength(20)]
+        [EmailAddress]
         public string Mail { get; set; }
 
-        [Required(ErrorMessage = "La contraseña es requerida"), MaxLength(20)]
+        [Required(ErrorMessage = "La contraseña es requerida"), MinLength(8) MaxLength(20)]
         [Display(Name = "Contraseña")]
+        
         public string pass { get; set; }
+
+       
+
 
         // Aca no se si iria un notation...
         public List<Entrada> entradas { get; set; }

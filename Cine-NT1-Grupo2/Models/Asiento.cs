@@ -13,9 +13,14 @@ namespace Cine_NT1_Grupo2.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength (1)]
+        [RegularExpression("[a-zA-Z]",ErrorMessage="solamente se admiten Letras")]
         public char Fila { get; set; }
 
         [Required]
+        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
+        [StringLength(2, ErrorMessage = "El número de Asiento es demasiado largo")]
+        [Range(1, 15) ErrorMessage = "solo se admiten numeros entre {1} y {2}]
         public int Numero { get; set; }
 
 
