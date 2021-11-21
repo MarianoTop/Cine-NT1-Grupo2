@@ -206,15 +206,40 @@ namespace Cine_NT1_Grupo2.Controllers
             {
                 return NotFound();
             }
+          /*trate de usar first or default pero me devuelve un solo elemento */ 
+            var asientosTotales = from s in _context.Funcion
+                                  where s.Id == IdFuncion
+                                  select s.Asientos;
 
-            var asientos = from s in _context.Funcion
-                         where s.Id == IdFuncion
-                         select s;
+
             /*Complicado, como le devuelvo el asiento directamente sin Fila y Numero */
             /* Por otro lado creo que a futuro tendremos que crear un atributo para saber a quien le pertenece
              * sino siempre va a volver*/
 
-            ViewBag.AsientoPeli = new SelectList(asientos.ToList(), "Id", "Asiento");
+            /* Al ser una lista creo que se devuelve distinto*/
+            /* https://stackoverflow.com/questions/668589/how-can-i-add-an-item-to-a-selectlist-in-asp-net-mvc */
+
+            /* Por algun motivo entiende que se trata de una lista dentro de otra lista*/ 
+
+            List<SelectListItem> listaAsientos = new List<SelectListItem>();
+
+            foreach(var  asiento in asientosTotales)
+            {
+
+                foreach (var item in asiento)
+                {
+                    listaAsientos.Add(new SelectListItem()
+                    {
+                        Text = item.Fila.ToString() + item.Numero.ToString(),
+                        Value = item.Id.ToString()
+                    });
+                }
+
+               
+            }
+
+
+            ViewBag.AsientoPeli = new SelectList(listaAsientos, "Value", "Text");
 
             return View();
         }

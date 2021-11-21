@@ -1,7 +1,7 @@
 ﻿@model Cine_NT1_Grupo2.Models.Pelicula
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Seleccion de funcion";
 }
 
 <h1>Create</h1>
@@ -20,7 +20,7 @@
         </dd>
 
 
-        <form asp-action="Create">
+        <form asp-action="SelectAsiento">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             @*Html.DropDownListFor(m => m.Funcion, new SelectList(ViewBag.Funciones, "Value", "Text"))*@

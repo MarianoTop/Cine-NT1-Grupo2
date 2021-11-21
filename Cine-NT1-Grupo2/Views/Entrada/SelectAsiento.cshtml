@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Cine_NT1_Grupo2.Models.Entrada>
 
 @{
-    ViewData["Title"] = "View";
+    ViewData["Title"] = "Seleccion de asiento";
 }
 
 <h1>Create</h1>
@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-            @Html.DropDownList("IdFuncion", ViewBag.AsientoPeli as SelectList)
+            @Html.DropDownList("Id", ViewBag.AsientoPeli as SelectList)
 
 
             <div class="form-group">
