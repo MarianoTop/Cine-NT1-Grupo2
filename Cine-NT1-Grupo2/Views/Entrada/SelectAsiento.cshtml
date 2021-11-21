@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cine_NT1_Grupo2.Models.Entrada>
+﻿@model Cine_NT1_Grupo2.Models.Funcion
 
 @{
     ViewData["Title"] = "Seleccion de asiento";
@@ -11,10 +11,13 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            @*Se le agrega la Id del model para que sea enviada por parametro*@
+            <input type="hidden" asp-for="Id" />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-            @Html.DropDownList("Id", ViewBag.AsientoPeli as SelectList)
+            @Html.DropDownList("AsientoId", ViewBag.AsientoPeli as SelectList)
 
 
             <div class="form-group">

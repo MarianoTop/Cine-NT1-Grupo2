@@ -69,7 +69,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EntradaId")] Entrada entrada)
+        public async Task<IActionResult> Create([Bind("FuncionId,AsientoId")] Entrada entrada)
         {
             if (ModelState.IsValid)
             {
@@ -253,7 +253,7 @@ namespace Cine_NT1_Grupo2.Controllers
 
             ViewBag.AsientoPeli = new SelectList(listaAsientos, "Value", "Text");
 
-            return View();
+            return View(funcion);
         }
 
 
