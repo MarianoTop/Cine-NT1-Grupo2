@@ -188,7 +188,7 @@ namespace Cine_NT1_Grupo2.Controllers
 
             ViewBag.FechasPelis = new SelectList(fechas.ToList(), "Id", "Fecha");
 
-            return View();
+            return View(pelicula);
         }
 
 
@@ -211,8 +211,10 @@ namespace Cine_NT1_Grupo2.Controllers
                          where s.Id == IdFuncion
                          select s;
             /*Complicado, como le devuelvo el asiento directamente sin Fila y Numero */
+            /* Por otro lado creo que a futuro tendremos que crear un atributo para saber a quien le pertenece
+             * sino siempre va a volver*/
 
-            ViewBag.FechasPelis = new SelectList(asientos.ToList(), "Id", "Asiento");
+            ViewBag.AsientoPeli = new SelectList(asientos.ToList(), "Id", "Asiento");
 
             return View();
         }

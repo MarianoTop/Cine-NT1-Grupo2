@@ -22,7 +22,8 @@ namespace Cine_NT1_Grupo2.Controllers
         // GET: Funcion
         public async Task<IActionResult> Index()
         {
-            // El include permite hacer un join entre distintas tablas.. example. Estimo que automaticamente une las keys para obtener el nombre?
+            // El include permite hacer un join entre distintas tablas.. example.
+            // Estimo que automaticamente une las keys para obtener el nombre?
 
             /*https://www.it-swarm-es.com/es/sql/que-hace-include-en-linq/1048745635/ */
             return View(await _context.Funcion
@@ -74,7 +75,10 @@ namespace Cine_NT1_Grupo2.Controllers
             {
                 _context.Add(funcion);
 
-                /* Aca deberia encontrar como agregar asientos , ¿como podre indicarle el ID de mi funcion?*/
+                /* Aca deberia encontrar como agregar asientos , ¿como podre indicarle el ID de mi funcion?
+                 Tuve que agregarle la foreign key en el modelo para encontrar como indicarle.
+                 */
+
                 await _context.SaveChangesAsync();
 
 
