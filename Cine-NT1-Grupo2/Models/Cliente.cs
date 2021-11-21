@@ -12,12 +12,12 @@ namespace Cine_NT1_Grupo2.Models
 
         // chequea que los usuarios carguen sus datos completos y correctos, no admitiendo formatos de numeros en nombre
         [Required(ErrorMessage = "El nombre es requerido, no admitimos usuarios Anonomios"), MaxLength(20)]
-        [RegularExpression("[a-zA-Z]*", ErrorMessage = "el campo {0} no admite numeros")]
+        [RegularExpression("[a-zA-Z ]*", ErrorMessage = "el campo {0} no admite numeros")]
         public string Nombre { get;set;}
 
         // el apellido debe estar con el campo completo y no admite numeros
         [Required(ErrorMessage = "El Apellido es requerido"), MaxLength(20)]
-        [RegularExpression("[a-zA-Z]*", ErrorMessage = "el campo {0} no admite numeros")]
+        [RegularExpression("[a-zA-Z ]*", ErrorMessage = "el campo {0} no admite numeros")]
         public string Apellido { get; set; }
 
         //el campo mail tiene formato valido de mail

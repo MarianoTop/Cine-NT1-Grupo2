@@ -22,7 +22,7 @@ namespace Cine_NT1_Grupo2.Models
 
         //valida que el nombre sea en caracteres alfabeticos
         [Required(ErrorMessage = "Por favor, ingrese el nombre del titular de la tarjeta"), MaxLength(30)]
-        [RegularExpression("[a-z A-Z]*", ErrorMessage="el campo {0} no admite numeros")]
+        [RegularExpression("[a-z A-Z ]*", ErrorMessage="el campo {0} no admite numeros")]
         public string Nombre { get; set; } 
         /*
        private int numero;
