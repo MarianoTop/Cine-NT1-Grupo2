@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cine_NT1_Grupo2.Migrations
 {
     [DbContext(typeof(CineContext))]
-    [Migration("20211121193045_FKEntradas")]
-    partial class FKEntradas
+    [Migration("20211122171338_1.0")]
+    partial class _10
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -203,6 +203,9 @@ namespace Cine_NT1_Grupo2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
+
+                    b.Property<long>("Numero")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

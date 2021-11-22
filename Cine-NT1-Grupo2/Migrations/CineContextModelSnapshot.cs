@@ -203,8 +203,7 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasMaxLength(30);
 
                     b.Property<long>("Numero")
-                        .HasColumnType("bigint")
-                        .HasMaxLength(16);
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

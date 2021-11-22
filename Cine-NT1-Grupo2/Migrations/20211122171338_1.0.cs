@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cine_NT1_Grupo2.Migrations
 {
-    public partial class FKEntradas : Migration
+    public partial class _10 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -80,6 +80,7 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<long>(nullable: false),
                     FechaDeVencimiento = table.Column<DateTime>(nullable: false),
                     CodigoSeguridad = table.Column<int>(nullable: false),
                     Nombre = table.Column<string>(maxLength: 30, nullable: false),
