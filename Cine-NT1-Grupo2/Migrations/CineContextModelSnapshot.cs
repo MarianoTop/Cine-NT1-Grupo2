@@ -202,6 +202,10 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
+                    b.Property<long>("Numero")
+                        .HasColumnType("bigint")
+                        .HasMaxLength(16);
+
                     b.HasKey("Id");
 
                     b.HasIndex("Clienteid");

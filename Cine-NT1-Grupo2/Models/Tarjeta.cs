@@ -9,6 +9,13 @@ namespace Cine_NT1_Grupo2.Models
     {
         [Required]
         public int Id { get; set; }
+        
+        
+        //******DEBERIAMOS AGREGARLE UN NUMERO DE TARJETA PARA PODER CREARLA********
+
+        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")] //[RegularExpression("^[0-9]*$", ErrorMessage = "* Solo se permiten números.")]
+        [Range(1000000000000000, 9999999999999999, ErrorMessage = "ingrese un {0} Valido")]
+        public long Numero { get; set; }
 
         [Required(ErrorMessage = "Por favor, ingrese la fecha de vencimiento de su tarjeta")]
         public DateTime FechaDeVencimiento { get; set; }

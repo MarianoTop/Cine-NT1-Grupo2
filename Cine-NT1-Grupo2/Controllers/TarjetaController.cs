@@ -54,10 +54,23 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FechaDeVencimiento,CodigoSeguridad,Nombre")] Tarjeta tarjeta)
+        public async Task<IActionResult> Create([Bind("Id, Numero ,FechaDeVencimiento,CodigoSeguridad,Nombre")] Tarjeta tarjeta)
         {
+
             if (ModelState.IsValid)
             {
+                //*****ACA VALIDAMOS QUE LA TARJETA NO PUEDA CARGARSE MISMO NUMERO Y MISMO TITULAR****
+                bool tarjetaExiste = _context.Tarjeta.Any(t => ((t.Numero == tarjeta.Numero) && (t.Nombre == tarjeta.Nombre)));
+
+
+                if (tarjetaExiste)
+                {
+                    ModelState.AddModelError("Nombre", "La tarjeta ya se encuentra cargada en Sistema");
+
+                   
+                    return View(tarjeta);
+                }
+
                 _context.Add(tarjeta);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,7 +99,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaDeVencimiento,CodigoSeguridad,Nombre")] Tarjeta tarjeta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Numero ,FechaDeVencimiento,CodigoSeguridad,Nombre")] Tarjeta tarjeta)
         {
             if (id != tarjeta.Id)
             {

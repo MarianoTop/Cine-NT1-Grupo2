@@ -21,7 +21,7 @@ namespace Cine_NT1_Grupo2.Models
         public string Apellido { get; set; }
 
         //el campo mail tiene formato valido de mail
-        [Required(ErrorMessage = "El mail es requerido"), MaxLength(20)]
+        [Required(ErrorMessage = "El mail es requerido"), MaxLength(20)] // deberiamos aumentar el tamaño permitido tambien en la base de datos
         [EmailAddress(ErrorMessage = "Debe ser un Mail con formato VALIDO")]
         public string Mail { get; set; }
 

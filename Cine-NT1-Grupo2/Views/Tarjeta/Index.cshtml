@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FechaDeVencimiento)
             </th>
             <th>
@@ -27,11 +30,14 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaDeVencimiento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CodigoSeguridad)
+                @Html.HiddenFor(modelItem => item.CodigoSeguridad)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)

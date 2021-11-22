@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cine_NT1_Grupo2.Migrations
 {
     [DbContext(typeof(CineContext))]
-    [Migration("20211122003727_intentoBD")]
-    partial class intentoBD
+    [Migration("20211122144320_agregueNroTarjeta")]
+    partial class agregueNroTarjeta
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -203,6 +203,10 @@ namespace Cine_NT1_Grupo2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
+
+                    b.Property<long>("Numero")
+                        .HasColumnType("bigint")
+                        .HasMaxLength(16);
 
                     b.HasKey("Id");
 
