@@ -22,7 +22,8 @@ namespace Cine_NT1_Grupo2.Controllers
         // GET: Entrada
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Entrada.ToListAsync());
+            return View(await _context.Entrada.Include(entrada => entrada.Funcion.Pelicula)
+                .Include(entrada => entrada.Funcion.Asientos).ToListAsync());
         }
 
         // GET: Entrada/Details/5
