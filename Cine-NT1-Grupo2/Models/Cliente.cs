@@ -29,10 +29,13 @@ namespace Cine_NT1_Grupo2.Models
         [Required(ErrorMessage = "La contraseña es requerida"), MinLength(8) ,MaxLength(20)]
         [Display(Name = "Contraseña")]
         [DataType(DataType.Password)]
-
+        
         public string pass { get; set; }
-
-       
+        
+        /*
+        [Compare("Password", ErrorMessage = "La contraseña no coincide, VOLVE A INTENTAR !")]
+        public string ConfirmarContraseña { get; set; }
+        */
 
 
         // Aca no se si iria un notation...

@@ -40,7 +40,8 @@
                 @Html.DisplayFor(modelItem => item.Mail)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.pass)
+                @Html.HiddenFor(modelItem => item.pass) 
+                @*esta linea oculta la contraseña para que no pueda ser visible en el index*@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
