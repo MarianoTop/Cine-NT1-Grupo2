@@ -7,9 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cine_NT1_Grupo2.Context;
 using Cine_NT1_Grupo2.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Cine_NT1_Grupo2.Controllers
 {
+    [AllowAnonymous]
     public class ClienteController : Controller
     {
         private readonly CineContext _context;
@@ -44,17 +49,19 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Cliente/Create
-        public IActionResult Create()
+        
+        public IActionResult Registrarse()
         {
             return View();
         }
 
+        
         // POST: Cliente/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Nombre,Apellido,Mail,pass")] Cliente cliente)
+        public async Task<IActionResult> Registrarse([Bind("id,Nombre,Apellido,Mail,pass")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +80,7 @@ namespace Cine_NT1_Grupo2.Controllers
 
                     return View(cliente);
                 }
-
+                cliente.Rol = Rol.USUARIO;
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -165,5 +172,73 @@ namespace Cine_NT1_Grupo2.Controllers
         {
             return _context.Cliente.Any(e => e.id == id);
         }
+
+        /*No entiendo el motivo pero si o si el string debe llamarse returnUrl */
+        /*RTA https://www.it-swarm-es.com/es/asp.net/como-funciona-la-redireccion-returnurl-en-asp.net-mvc5/1044284456/ */
+        /* https://stackoverflow.com/questions/20123612/how-am-i-supposed-to-use-returnurl-viewbag-returnurl-in-mvc-4 */
+        public IActionResult Loguearse(string returnUrl)
+        {
+            TempData["UrlAEnviar"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Loguearse(string mail, string pass)
+        {
+            var UrlAEnviar = TempData["UrlAEnviar"] as string;
+
+            if (!string.IsNullOrEmpty(mail) && !string.IsNullOrEmpty(pass))
+            {
+
+                var cliente = _context.Cliente.FirstOrDefault(s => s.Mail == mail);
+
+                if (cliente != null)
+                {
+                    
+                    if (cliente.pass == pass)
+                    {
+                        /* Esto es como la tarjeta*/
+                        ClaimsIdentity identidad = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                        identidad.AddClaim(new Claim(ClaimTypes.Email, mail));
+                        identidad.AddClaim(new Claim(ClaimTypes.GivenName, cliente.Nombre));
+                        identidad.AddClaim(new Claim(ClaimTypes.Role, cliente.Rol.ToString()));
+
+                        ClaimsPrincipal principal = new ClaimsPrincipal(identidad);
+
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+                        if (!string.IsNullOrEmpty(UrlAEnviar))
+                        {
+                            return Redirect(UrlAEnviar);
+                        }
+                        else
+                        {
+                            // Redirigimos a la pagina principal
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+
+                }
+
+            }
+
+
+            ViewBag.ErrorEnLogin = "Intente nuvamente. Mail y/o Contraseña erróneos";
+            TempData["UrlAEnviar"] = UrlAEnviar; // Volvemos a enviarla en el TempData para no perderla
+            return View();
+
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Desloguearse()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
