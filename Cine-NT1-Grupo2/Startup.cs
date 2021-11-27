@@ -13,6 +13,7 @@ using Cine_NT1_Grupo2.Context;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Cine_NT1_Grupo2
 {
@@ -37,6 +38,21 @@ namespace Cine_NT1_Grupo2
             services.AddDbContext<CineContext>(options => options.UseSqlServer(Configuration["ConnectionString:CineBDConnection"]));
             services.AddMvc().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+
+            services.AddControllersWithViews();
+
+            /* Se agrega Identity*/
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+                opciones =>
+                {
+                    opciones.LoginPath = "/Cliente/Loguearse";
+                    opciones.AccessDeniedPath = "/Usuarios/DenegarAcceso";
+                    opciones.LogoutPath = "/Usuarios/Desloguearse";
+                }
+            );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +72,8 @@ namespace Cine_NT1_Grupo2
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
+              
 
             app.UseAuthorization();
 
@@ -65,6 +83,8 @@ namespace Cine_NT1_Grupo2
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseCookiePolicy();
         }
     }
 }

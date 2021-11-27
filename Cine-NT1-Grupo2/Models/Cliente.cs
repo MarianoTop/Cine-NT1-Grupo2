@@ -14,7 +14,7 @@ namespace Cine_NT1_Grupo2.Models
         [Required(ErrorMessage = "El nombre es requerido, no admitimos usuarios Anonomios"), MaxLength(20)]
         [RegularExpression("[a-zA-Z ]*", ErrorMessage = "el campo {0} no admite numeros")]
         public string Nombre { get;set;}
-
+         
         // el apellido debe estar con el campo completo y no admite numeros
         [Required(ErrorMessage = "El Apellido es requerido"), MaxLength(20)]
         [RegularExpression("[a-zA-Z ]*", ErrorMessage = "el campo {0} no admite numeros")]
@@ -41,6 +41,10 @@ namespace Cine_NT1_Grupo2.Models
         // Aca no se si iria un notation...
         public List<Entrada> entradas { get; set; }
         public List<Tarjeta> tarjetas{ get; set; }
+
+        /* Se agrega un rol*/ 
+        [Required]
+        public Rol Rol { get; set; }
 
         /*
         private string nombre;
