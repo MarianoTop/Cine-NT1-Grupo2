@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cine_NT1_Grupo2.Migrations
 {
-    public partial class _10 : Migration
+    public partial class migracionIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,6 +47,7 @@ namespace Cine_NT1_Grupo2.Migrations
                     Apellido = table.Column<string>(maxLength: 20, nullable: false),
                     Mail = table.Column<string>(maxLength: 20, nullable: false),
                     pass = table.Column<string>(maxLength: 20, nullable: false),
+                    Rol = table.Column<int>(nullable: false),
                     CineId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

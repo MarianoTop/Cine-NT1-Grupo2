@@ -91,6 +91,9 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
+                    b.Property<int>("Rol")
+                        .HasColumnType("int");
+
                     b.Property<string>("pass")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")

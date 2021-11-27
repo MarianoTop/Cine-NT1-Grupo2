@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cine_NT1_Grupo2.Migrations
 {
     [DbContext(typeof(CineContext))]
-    [Migration("20211122171338_1.0")]
-    partial class _10
+    [Migration("20211127153647_migracionIdentity")]
+    partial class migracionIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,6 +92,9 @@ namespace Cine_NT1_Grupo2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
+
+                    b.Property<int>("Rol")
+                        .HasColumnType("int");
 
                     b.Property<string>("pass")
                         .IsRequired()
