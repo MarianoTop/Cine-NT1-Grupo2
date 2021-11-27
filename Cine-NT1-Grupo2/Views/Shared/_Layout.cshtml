@@ -50,6 +50,22 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tarjeta" asp-action="Index">Tarjeta</a>
                         </li>
 
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                    <li class="nav-item">
+                        <form asp-controller="Cliente" asp-action="Desloguearse">
+                            
+                            <button type="submit" class="nav-link text-danger">Cerrar Sesión</button>
+                            </form>
+                    </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Loguearse">Iniciar Sesión</a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>

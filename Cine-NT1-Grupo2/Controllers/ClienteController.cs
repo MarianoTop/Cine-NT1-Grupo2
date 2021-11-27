@@ -231,6 +231,9 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
 
+        /* Preguntas porque no se puede ingresar a este metodo directamente a traves de la Url... Estimo que al ser un metodo post eso no es posible
+         * dado que justamente la idea es que no sea visible.. a su vez entiendo que no puedo usar un anchor para llamarlo debiendo usar un form?
+         es correcto*/
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Desloguearse()
