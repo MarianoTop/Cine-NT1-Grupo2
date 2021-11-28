@@ -225,7 +225,7 @@ namespace Cine_NT1_Grupo2.Controllers
             var asientosTotales = from s in _context.Funcion
                                   join st in _context.Asiento
                                   on s.Id equals st.FuncionId
-                                  where s.Id == IdFuncion
+                                  where (s.Id == IdFuncion )
                                   orderby st.Fila ascending, st.Numero ascending
                                   select st;
 
