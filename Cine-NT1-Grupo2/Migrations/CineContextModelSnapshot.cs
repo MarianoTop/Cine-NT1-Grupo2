@@ -26,6 +26,9 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Fila")
                         .IsRequired()
                         .HasColumnType("nvarchar(1)")

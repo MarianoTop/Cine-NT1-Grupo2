@@ -26,6 +26,11 @@ namespace Cine_NT1_Grupo2.Models
 
         // relacion otra entidad
 
+
+        [ForeignKey(nameof(Cliente))]
+        public int ClienteId { get; set; }
+
+
         [ForeignKey(nameof(Funcion))]
         public int FuncionId { get; set; }
 

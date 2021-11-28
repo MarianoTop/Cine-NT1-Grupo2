@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cine_NT1_Grupo2.Migrations
 {
-    public partial class cine : Migration
+    public partial class _10 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -134,6 +134,7 @@ namespace Cine_NT1_Grupo2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Fila = table.Column<string>(maxLength: 1, nullable: false),
                     Numero = table.Column<int>(maxLength: 2, nullable: false),
+                    ClienteId = table.Column<int>(nullable: false),
                     FuncionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
