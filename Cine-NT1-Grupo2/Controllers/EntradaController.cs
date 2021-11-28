@@ -237,13 +237,12 @@ namespace Cine_NT1_Grupo2.Controllers
              * https://www.tutorialsteacher.com/linq/linq-joining-operator-join
              * */
 
-            /* creo que a futuro tendremos que crear un atributo para saber a quien le pertenece
-        * sino siempre va a devolver todos, ademas tendremos que preguntar si es !null o algo similar*/
+            /* Creo que la consulta puede armarse mejor, pero al menos funciona*/
 
             var asientosTotales = from s in _context.Funcion
                                   join st in _context.Asiento
                                   on s.Id equals st.FuncionId
-                                  where (s.Id == IdFuncion )
+                                  where (s.Id == IdFuncion && st.ClienteId==0)
                                   orderby st.Fila ascending, st.Numero ascending
                                   select st;
 
