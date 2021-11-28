@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Agregar una Tarjeta</a>
 </p>
 <table class="table">
     <thead>
@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.FechaDeVencimiento)
             </td>
             <td>
-                @Html.HiddenFor(modelItem => item.CodigoSeguridad)
+                @Html.HiddenFor(modelItem => item.CodigoSeguridad) @*oculta el codigo de seguridad para que no sea visible*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)

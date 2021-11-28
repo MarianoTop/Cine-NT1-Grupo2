@@ -80,13 +80,28 @@ namespace Cine_NT1_Grupo2.Controllers
             if (ModelState.IsValid)
             {
 
+                //*** valida que la fecha sea en el dia actual o posterior.. no pueden cargarse fechas pasadas****
+                bool esfechaPrevia = _context.Funcion.Any(func => (func.Fecha <= DateTime.Today));
+
+                if (esfechaPrevia)
+                {
+                    ModelState.AddModelError("Fecha", "¡¡¡no podemos viajar al pasado!!");
+
+                    var entradasAElegir = from s in _context.Pelicula
+                                          select s;
+
+                    ViewBag.FuncionesPelis = new SelectList(entradasAElegir.ToList(), "Id", "Nombre");
+
+                    return View(funcion);
+                }
+
                 /* Chequeamos que no se repita la sala*/ 
                 bool funcionExiste = _context.Funcion.Any(f => ((f.Fecha ==funcion.Fecha) &&( f.Sala == funcion.Sala )) );
 
 
                 if (funcionExiste)
                 {
-                    ModelState.AddModelError("", "Ya existe una funcion para esa fecha y sala");
+                    ModelState.AddModelError("", "****Ya existe una funcion para esa fecha y sala****");
 
                     var entradasAElegir = from s in _context.Pelicula
                                           select s;
