@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Cine_NT1_Grupo2.Controllers
 {
 
-    [Authorize(Roles = nameof(Rol.ADMIN))]
+    [Authorize]
     public class FuncionController : Controller
     {
         private readonly CineContext _context;
@@ -35,6 +35,7 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Funcion/Details/5
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -53,6 +54,7 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Funcion/Create
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         public IActionResult Create()
         {
             var entradasAElegir = from s in _context.Pelicula
@@ -69,6 +71,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         /*  Aca se agregan los elementos necesarios*/
         public async Task<IActionResult> Create([Bind("Id,Fecha,Sala,IdPelicula")] Funcion funcion)
         {
@@ -132,6 +135,7 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Funcion/Edit/5
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -158,6 +162,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         /* Modificado para que pida el IdPelicula */
         public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Sala,IdPelicula")] Funcion funcion)
         {
@@ -190,6 +195,7 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Funcion/Delete/5
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -210,6 +216,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // POST: Funcion/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var funcion = await _context.Funcion.FindAsync(id);
