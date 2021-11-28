@@ -26,38 +26,50 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Asiento" asp-action="Index">Asiento</a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cine" asp-action="Index">Cine</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Entrada" asp-action="Index">Entrada</a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Funcion" asp-action="Index">Funcion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pelicula" asp-action="Index">Pelicula</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tarjeta" asp-action="Index">Tarjeta</a>
-                        </li>
+
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                    <li class="nav-item">
-                        <form asp-controller="Cliente" asp-action="Desloguearse">
-                            
-                            <button type="submit" class="nav-link text-danger">Cerrar Sesión</button>
-                            </form>
-                    </li>
+
+                            @if (User.IsInRole(nameof(Rol.ADMIN)))
+                            {
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Asiento" asp-action="Index">Asiento</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cine" asp-action="Index">Cine</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Funcion" asp-action="Index">Funcion</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Pelicula" asp-action="Index">Pelicula</a>
+                                </li>
+                            }
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Entrada" asp-action="Index">Entrada</a>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Tarjeta" asp-action="Index">Tarjeta</a>
+                            </li>
+
+                            <li class="nav-item">
+
+                                <form asp-controller="Cliente" asp-action="Desloguearse">
+
+                                    <button type="submit" class="nav-link text-danger">Cerrar Sesión</button>
+                                </form>
+                            </li>
                         }
                         else
                         {
