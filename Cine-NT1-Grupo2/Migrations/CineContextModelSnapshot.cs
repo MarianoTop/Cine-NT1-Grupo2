@@ -116,7 +116,7 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.Property<int>("AsientoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Clienteid")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<int?>("FuncionId")
@@ -126,7 +126,7 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasIndex("AsientoId");
 
-                    b.HasIndex("Clienteid");
+                    b.HasIndex("ClienteId");
 
                     b.HasIndex("FuncionId");
 
@@ -248,7 +248,9 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasOne("Cine_NT1_Grupo2.Models.Cliente", null)
                         .WithMany("entradas")
-                        .HasForeignKey("Clienteid");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Cine_NT1_Grupo2.Models.Funcion", "Funcion")
                         .WithMany("EntradasDisponibles")

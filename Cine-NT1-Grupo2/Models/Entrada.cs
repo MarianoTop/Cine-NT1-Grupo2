@@ -20,6 +20,10 @@ namespace Cine_NT1_Grupo2.Models
         public int? FuncionId { get; set; }
         public Funcion Funcion { get; set; }
 
+
+        [ForeignKey(nameof(Cliente))]
+        public int ClienteId { get; set; }
+
         [ForeignKey(nameof(Asiento))]
         public int AsientoId { get; set; }
         public Asiento Asiento { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cine_NT1_Grupo2.Migrations
 {
-    public partial class migracionIdentity : Migration
+    public partial class cine : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,8 +29,8 @@ namespace Cine_NT1_Grupo2.Migrations
                     EntradaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FuncionId = table.Column<int>(nullable: true),
-                    AsientoId = table.Column<int>(nullable: false),
-                    Clienteid = table.Column<int>(nullable: true)
+                    ClienteId = table.Column<int>(nullable: false),
+                    AsientoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -168,9 +168,9 @@ namespace Cine_NT1_Grupo2.Migrations
                 column: "AsientoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Entrada_Clienteid",
+                name: "IX_Entrada_ClienteId",
                 table: "Entrada",
-                column: "Clienteid");
+                column: "ClienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Entrada_FuncionId",
@@ -201,12 +201,12 @@ namespace Cine_NT1_Grupo2.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Entrada_Cliente_Clienteid",
+                name: "FK_Entrada_Cliente_ClienteId",
                 table: "Entrada",
-                column: "Clienteid",
+                column: "ClienteId",
                 principalTable: "Cliente",
                 principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Entrada_Asiento_AsientoId",

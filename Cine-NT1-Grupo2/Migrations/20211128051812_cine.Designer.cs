@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cine_NT1_Grupo2.Migrations
 {
     [DbContext(typeof(CineContext))]
-    [Migration("20211127153647_migracionIdentity")]
-    partial class migracionIdentity
+    [Migration("20211128051812_cine")]
+    partial class cine
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,7 +118,7 @@ namespace Cine_NT1_Grupo2.Migrations
                     b.Property<int>("AsientoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Clienteid")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<int?>("FuncionId")
@@ -128,7 +128,7 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasIndex("AsientoId");
 
-                    b.HasIndex("Clienteid");
+                    b.HasIndex("ClienteId");
 
                     b.HasIndex("FuncionId");
 
@@ -250,7 +250,9 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasOne("Cine_NT1_Grupo2.Models.Cliente", null)
                         .WithMany("entradas")
-                        .HasForeignKey("Clienteid");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Cine_NT1_Grupo2.Models.Funcion", "Funcion")
                         .WithMany("EntradasDisponibles")
