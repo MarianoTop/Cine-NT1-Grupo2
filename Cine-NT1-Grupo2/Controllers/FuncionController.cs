@@ -111,7 +111,9 @@ namespace Cine_NT1_Grupo2.Controllers
                         asiento.Fila = fila;
                         asiento.Numero = numero;
                         asiento.FuncionId = funcion.Id;
-                     
+                        
+                        /*la base de datos acepta null pero C# no porque un int no puede ser null. no entiendo porque la bd pondra null
+                         * asiento.ClienteId = null;*/
                         _context.Add(asiento);
                     }
 

@@ -76,6 +76,24 @@ namespace Cine_NT1_Grupo2.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                /* Previamente agrego al asiento el Id del cliente*/
+                var idAsientoABuscar = entrada.AsientoId;
+
+                if (idAsientoABuscar != null)
+                {
+                  
+                    /* No comprendo puntualmente que hace el await y como funciona pero sino lo pongo no lo considera Asiento*/
+                    var asiento = await _context.Asiento.FirstOrDefaultAsync(m => m.Id == idAsientoABuscar);
+
+                    if (asiento != null)
+                    {
+                        asiento.ClienteId = entrada.ClienteId;
+                    }
+                }
+
+             
+
                 _context.Add(entrada);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
