@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cine_NT1_Grupo2.Context;
 using Cine_NT1_Grupo2.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Cine_NT1_Grupo2.Controllers
 {
@@ -24,8 +25,27 @@ namespace Cine_NT1_Grupo2.Controllers
         // GET: Entrada
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Entrada.Include(entrada => entrada.Funcion.Pelicula)
-                .Include(entrada => entrada.Funcion.Asientos).ToListAsync());
+            /* para buscar un id directamente usar metodo User.FindFirstValue */
+
+            /*Creo anteriormente la lista porque sino me envia un error */
+            List<Entrada> entradasModel;
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
+            {
+                var idCliente = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+
+                entradasModel = await _context.Entrada.Where(s => s.ClienteId.ToString() == idCliente).Include(entrada => entrada.Funcion.Pelicula)
+                    .Include(entrada => entrada.Funcion.Asientos).ToListAsync();
+            }
+            else
+            {
+                /* Si es admin busco la lista total*/
+                entradasModel = await _context.Entrada.Include(entrada => entrada.Funcion.Pelicula)
+                   .Include(entrada => entrada.Funcion.Asientos).ToListAsync();
+            }
+            
+           
+
+            return View(entradasModel);
         }
 
         // GET: Entrada/Details/5
