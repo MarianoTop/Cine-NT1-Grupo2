@@ -92,7 +92,7 @@ namespace Cine_NT1_Grupo2.Controllers
                 cliente.Rol = Rol.USUARIO;
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(cliente);
         }
