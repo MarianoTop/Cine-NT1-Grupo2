@@ -219,12 +219,16 @@ namespace Cine_NT1_Grupo2.Controllers
                         /* Esto es como la tarjeta*/
                         ClaimsIdentity identidad = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
 
+                        /* https://docs.microsoft.com/en-us/dotnet/api/system.security.claims.claimtypes?view=net-6.0*/
                         identidad.AddClaim(new Claim(ClaimTypes.Email, mail));
                         identidad.AddClaim(new Claim(ClaimTypes.GivenName, cliente.Nombre));
                         identidad.AddClaim(new Claim(ClaimTypes.Role, cliente.Rol.ToString()));
-
+                        /*Le paso el id asi... no se si es correcto https://stackoverflow.com/questions/24892222/using-claims-types-properly-in-owin-identity-and-asp-net-mvc */
+                        identidad.AddClaim(new Claim(ClaimTypes.NameIdentifier, cliente.id.ToString()));
+                        
                         ClaimsPrincipal principal = new ClaimsPrincipal(identidad);
 
+                        
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
                         if (!string.IsNullOrEmpty(UrlAEnviar))

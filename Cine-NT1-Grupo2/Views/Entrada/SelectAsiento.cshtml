@@ -15,7 +15,8 @@
             @*Se le agrega la Id del model para que sea enviada por parametro*@
             @*Se le agrega name para que se le envia con este nombre al model Create*@
             <input type="hidden" asp-for="Id" name="FuncionId" />
-
+       
+            <input type="hidden" value=@User.FindFirstValue(ClaimTypes.NameIdentifier) name="ClienteId" />
 
 
 
