@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Cine_NT1_Grupo2.Controllers
 {
     [Authorize]
+
     public class TarjetaController : Controller
     {
         private readonly CineContext _context;

@@ -14,7 +14,8 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace Cine_NT1_Grupo2.Controllers
 {
-    [AllowAnonymous]
+
+    [Authorize]
     public class ClienteController : Controller
     {
         private readonly CineContext _context;
@@ -24,13 +25,17 @@ namespace Cine_NT1_Grupo2.Controllers
             _context = context;
         }
 
+
         // GET: Cliente
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Cliente.ToListAsync());
         }
 
+
         // GET: Cliente/Details/5
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,18 +54,22 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Cliente/Create
-        
+
+       [AllowAnonymous]
         public IActionResult Registrarse()
         {
             return View();
         }
 
-        
+
         // POST: Cliente/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Registrarse([Bind("id,Nombre,Apellido,Mail,pass")] Cliente cliente)
         {
             if (ModelState.IsValid)
@@ -89,6 +98,7 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Cliente/Edit/5
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -107,6 +117,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // POST: Cliente/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,Nombre,Apellido,Mail,pass")] Cliente cliente)
@@ -140,6 +151,7 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Cliente/Delete/5
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -157,7 +169,10 @@ namespace Cine_NT1_Grupo2.Controllers
             return View(cliente);
         }
 
+
+
         // POST: Cliente/Delete/5
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -168,6 +183,7 @@ namespace Cine_NT1_Grupo2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = nameof(Rol.ADMIN))]
         private bool ClienteExists(int id)
         {
             return _context.Cliente.Any(e => e.id == id);
@@ -176,12 +192,15 @@ namespace Cine_NT1_Grupo2.Controllers
         /*No entiendo el motivo pero si o si el string debe llamarse returnUrl */
         /*RTA https://www.it-swarm-es.com/es/asp.net/como-funciona-la-redireccion-returnurl-en-asp.net-mvc5/1044284456/ */
         /* https://stackoverflow.com/questions/20123612/how-am-i-supposed-to-use-returnurl-viewbag-returnurl-in-mvc-4 */
+
+        [AllowAnonymous]
         public IActionResult Loguearse(string returnUrl)
         {
             TempData["UrlAEnviar"] = returnUrl;
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Loguearse(string mail, string pass)
         {
@@ -234,8 +253,9 @@ namespace Cine_NT1_Grupo2.Controllers
         /* Preguntas porque no se puede ingresar a este metodo directamente a traves de la Url... Estimo que al ser un metodo post eso no es posible
          * dado que justamente la idea es que no sea visible.. a su vez entiendo que no puedo usar un anchor para llamarlo debiendo usar un form?
          es correcto*/
-        [Authorize]
+      
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Desloguearse()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

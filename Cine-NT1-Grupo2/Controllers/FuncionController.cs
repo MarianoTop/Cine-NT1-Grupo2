@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cine_NT1_Grupo2.Context;
 using Cine_NT1_Grupo2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cine_NT1_Grupo2.Controllers
 {
+
+    [Authorize(Roles = nameof(Rol.ADMIN))]
     public class FuncionController : Controller
     {
         private readonly CineContext _context;
