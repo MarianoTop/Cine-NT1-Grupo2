@@ -20,8 +20,12 @@ namespace Cine_NT1_Grupo2.Controllers
          */
         public bool validarPass(string pass)
         {
+            if (string.IsNullOrEmpty(pass))
+            {
+                return false;
+            }
            
-
+            //uso de RegEx para validar la contraseña
             var tieneMay = Regex.Match(pass, $"[a-z]").Success;
             var tieneMin = Regex.Match(pass, $"[A-Z]").Success;
             var tieneNum = Regex.Match(pass, $"[0-9]").Success;

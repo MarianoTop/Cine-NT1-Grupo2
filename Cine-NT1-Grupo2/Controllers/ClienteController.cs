@@ -89,6 +89,7 @@ namespace Cine_NT1_Grupo2.Controllers
 
                     return View(cliente);
                 }
+                //valida la contraseña a travez de la clase que implementa la interfaz segruidad
                 if (seguridad.validarPass(cliente.pass))
                 {
                     cliente.Rol = Rol.USUARIO;
@@ -98,7 +99,7 @@ namespace Cine_NT1_Grupo2.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "contraseña No valida");
+                    ModelState.AddModelError("", "contraseña NO VALIDA: NO puede estar vacia, ser menor a 8 caracteres y debe contener una mayuscula una minúscula y un numero");
                 }
                 
             }
