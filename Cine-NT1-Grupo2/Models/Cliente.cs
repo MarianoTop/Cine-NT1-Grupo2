@@ -26,7 +26,7 @@ namespace Cine_NT1_Grupo2.Models
         public string Mail { get; set; }
 
         // la contraseña requerida no solo debe cumplir con un minimo de caracteres sino que no puede superar un maximo de ellos
-        [Required(ErrorMessage = "La contraseña es requerida"), MinLength(8) ,MaxLength(20)]
+        
         [Display(Name = "Contraseña")]
         [DataType(DataType.Password)]
         

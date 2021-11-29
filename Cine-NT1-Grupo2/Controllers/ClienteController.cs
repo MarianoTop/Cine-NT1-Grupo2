@@ -19,7 +19,7 @@ namespace Cine_NT1_Grupo2.Controllers
     public class ClienteController : Controller
     {
         private readonly CineContext _context;
-
+        private readonly Seguridad seguridad = new VerificacionBasica();
         public ClienteController(CineContext context)
         {
             _context = context;
@@ -89,10 +89,18 @@ namespace Cine_NT1_Grupo2.Controllers
 
                     return View(cliente);
                 }
-                cliente.Rol = Rol.USUARIO;
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                if (seguridad.validarPass(cliente.pass))
+                {
+                    cliente.Rol = Rol.USUARIO;
+                    _context.Add(cliente);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "contraseña No valida");
+                }
+                
             }
             return View(cliente);
         }
