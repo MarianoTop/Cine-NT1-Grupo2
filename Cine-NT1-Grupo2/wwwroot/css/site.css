@@ -61,7 +61,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-   /* background-image: url(https://hipertextual.com/wp-content/uploads/2017/03/Captura-de-pantalla-2017-03-30-a-las-11.59.05.png);*/
+    background-image: url(https://hipertextual.com/wp-content/uploads/2017/03/Captura-de-pantalla-2017-03-30-a-las-11.59.05.png);
 }
 .footer {
   position: absolute;
