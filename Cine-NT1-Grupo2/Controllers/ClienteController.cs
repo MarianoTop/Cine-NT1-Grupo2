@@ -51,7 +51,7 @@ namespace Cine_NT1_Grupo2.Controllers
 
 
         // GET: Cliente/Details/5
-        [Authorize(Roles = nameof(Rol.ADMIN))]
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -123,7 +123,7 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Cliente/Edit/5
-        [Authorize(Roles = nameof(Rol.ADMIN))]
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -142,7 +142,7 @@ namespace Cine_NT1_Grupo2.Controllers
         // POST: Cliente/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = nameof(Rol.ADMIN))]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,Nombre,Apellido,Mail,pass")] Cliente cliente)
@@ -280,7 +280,7 @@ namespace Cine_NT1_Grupo2.Controllers
 
 
 
-        // POST: Cliente/Delete/5
+        // POST: Cliente/DarseBaja/5
         [Authorize(Roles = nameof(Rol.USUARIO))]
         [HttpPost]
         [ValidateAntiForgeryToken]

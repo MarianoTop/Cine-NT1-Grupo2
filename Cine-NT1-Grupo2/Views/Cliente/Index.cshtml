@@ -4,15 +4,26 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@if (User.IsInRole(nameof(Rol.ADMIN))) // solo permite que el usuario ADMINSTRADOR tenga acceso a loc omandos de Funcion
+{
+    <h1>Clientes Registrados</h1>
+    <p>
+        <a asp-action="Registrarse">Registrar Usuario</a>
+    </p>
+}
+else
+{
+    <h1>Datos de tu cuenta</h1>
+    <p>
+        <form asp-controller="Cliente" asp-action="DarseBaja">
 
-<p>
-    <a asp-action="Registrarse">Registrarse</a>
-    <form asp-controller="Cliente" asp-action="DarseBaja">
+            <button type="submit" class="nav-link text-danger">Eliminar mi cuenta</button>
+        </form>
+    </p>
+}
 
-        <button type="submit" class="nav-link text-danger">Eliminar mi cuenta</button>
-    </form>
-</p>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -32,7 +43,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
@@ -47,14 +59,25 @@
                 @Html.HiddenFor(modelItem => item.pass)
                 @*esta linea oculta la contraseña para que no pueda ser visible en el index*@
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-           
+
+            @if (User.IsInRole(nameof(Rol.ADMIN)))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.id">Ver Mas</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Eliminar</a>
+                </td>
+ }
+            else
+            {
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.id"> Ver/Cambiar mis Datos</a> |                   
+                </td>
+            }
+
+
         </tr>
 
-}
+        }
     </tbody>
 </table>
