@@ -8,6 +8,10 @@
 
 <p>
     <a asp-action="Registrarse">Registrarse</a>
+    <form asp-controller="Cliente" asp-action="DarseBaja">
+
+        <button type="submit" class="nav-link text-danger">Eliminar mi cuenta</button>
+    </form>
 </p>
 <table class="table">
     <thead>
@@ -40,7 +44,7 @@
                 @Html.DisplayFor(modelItem => item.Mail)
             </td>
             <td>
-                @Html.HiddenFor(modelItem => item.pass) 
+                @Html.HiddenFor(modelItem => item.pass)
                 @*esta linea oculta la contraseña para que no pueda ser visible en el index*@
             </td>
             <td>
@@ -48,7 +52,9 @@
                 <a asp-action="Details" asp-route-id="@item.id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
             </td>
+           
         </tr>
+
 }
     </tbody>
 </table>

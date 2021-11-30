@@ -27,10 +27,26 @@ namespace Cine_NT1_Grupo2.Controllers
 
 
         // GET: Cliente
-        [Authorize(Roles = nameof(Rol.ADMIN))]
+        [Authorize]
         public async Task<IActionResult> Index()
+
         {
-            return View(await _context.Cliente.ToListAsync());
+
+            List<Cliente> clienteDevolver;
+
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
+            {
+                var idCliente = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+
+                clienteDevolver = await _context.Cliente.Where(s => s.id.ToString() == idCliente).ToListAsync();
+            }
+            else
+            {
+                clienteDevolver = await _context.Cliente.ToListAsync();
+            }
+
+
+                return View(clienteDevolver);
         }
 
 
@@ -263,10 +279,34 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
 
+
+        // POST: Cliente/Delete/5
+        [Authorize(Roles = nameof(Rol.USUARIO))]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DarseBaja()
+        {
+
+            var idCliente = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            /*No encontre otra manera de obtener el cliente, dado que el idCliente no es un int sino un string */
+          var  cliente= await _context.Cliente.Where(s => s.id.ToString() == idCliente).FirstOrDefaultAsync();
+            
+            _context.Cliente.Remove(cliente);
+            await _context.SaveChangesAsync();
+
+            /*Intente redirigir la accion pero exploto por lo que tuve que volver a copiar codigo */
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+
+
+        }
+
+
         /* Preguntas porque no se puede ingresar a este metodo directamente a traves de la Url... Estimo que al ser un metodo post eso no es posible
          * dado que justamente la idea es que no sea visible.. a su vez entiendo que no puedo usar un anchor para llamarlo debiendo usar un form?
          es correcto*/
-      
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Desloguearse()

@@ -96,10 +96,10 @@ namespace Cine_NT1_Grupo2.Controllers
         {
             if (ModelState.IsValid)
             {
-
+               
                 /* Previamente agrego al asiento el Id del cliente*/
                 var idAsientoABuscar = entrada.AsientoId;
-
+         
                 if (idAsientoABuscar != null)
                 {
                   
