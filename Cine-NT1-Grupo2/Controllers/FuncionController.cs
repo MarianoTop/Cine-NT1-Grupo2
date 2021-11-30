@@ -35,7 +35,7 @@ namespace Cine_NT1_Grupo2.Controllers
         }
 
         // GET: Funcion/Details/5
-        [Authorize(Roles = nameof(Rol.ADMIN))]
+     
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

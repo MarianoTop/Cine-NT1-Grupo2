@@ -29,29 +29,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sala)
-            </td>
-            <td>
-                @* Aca deberia verse el nombre, use un include en el controller para obtener los datos faltantes*@
-                @Html.DisplayFor(modelItem => item.Pelicula.Nombre)
-            </td>
-
-            @if (User.IsInRole(nameof(Rol.ADMIN))) // solo permite que el usuario ADMINSTRADOR tenga acceso a loc omandos de Funcion
-            {
+        @foreach (var item in Model)
+        {
+            <tr>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Ver Mas</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    @Html.DisplayFor(modelItem => item.Fecha)
                 </td>
-            }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sala)
+                </td>
+                <td>
+                    @* Aca deberia verse el nombre, use un include en el controller para obtener los datos faltantes*@
+                    @Html.DisplayFor(modelItem => item.Pelicula.Nombre)
+                </td>
 
-        </tr>
-}
+                @*Por algun motivo no me permite agregar una barrita entre lo que esta afuera y dentro del if *@
+                @if (User.IsInRole(nameof(Rol.ADMIN))) // solo permite que el usuario ADMINSTRADOR tenga acceso a loc omandos de Funcion
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Ver Mas</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Ver Mas</a>
+                    </td>
+                }
+
+            </tr>
+        }
     </tbody>
 </table>
