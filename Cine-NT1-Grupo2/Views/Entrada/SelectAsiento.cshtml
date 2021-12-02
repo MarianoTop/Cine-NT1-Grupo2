@@ -15,10 +15,11 @@
             @*Se le agrega la Id del model para que sea enviada por parametro*@
             @*Se le agrega name para que se le envia con este nombre al model Create*@
             <input type="hidden" asp-for="Id" name="FuncionId" />
-       
-            @*Aca se agrega el Id del cliente para que lo reciba la accion y pueda guardarlo en entrada*@
-            <input type="hidden" value=@User.FindFirstValue(ClaimTypes.NameIdentifier) name="ClienteId" />
 
+            @*Aca se agrega el Id del cliente para que lo reciba la accion y pueda guardarlo en entrada. Decidi que era mejor obtenerlo directamente 
+                en el metodo porque sino el usuario puede modificarlo al enviarlo desde inspeccionar.*@
+
+            @*<input type="hidden" value=@User.FindFirstValue(ClaimTypes.NameIdentifier) name="ClienteId" /> *@
 
 
             @Html.DropDownList("AsientoId", ViewBag.AsientoPeli as SelectList)

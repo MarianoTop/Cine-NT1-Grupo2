@@ -92,18 +92,29 @@ namespace Cine_NT1_Grupo2.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FuncionId,ClienteId,AsientoId")] Entrada entrada)
+        public async Task<IActionResult> Create([Bind("FuncionId,AsientoId")] Entrada entrada)
         {
             if (ModelState.IsValid)
             {
-               
-                /* Previamente agrego al asiento el Id del cliente*/
+
+
+                /*Como el usuario podia inspeccionar el elemento y modificarlo decidimos obtener el id directo en la accion
+                 *  https://www.delftstack.com/es/howto/csharp/how-to-convert-string-to-int-in-csharp/
+                 * Tuve que pasarlo a int*/
+
+                var texto = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                entrada.ClienteId = (int)Int64.Parse(texto);
+
+                /* Previamente  a agregar la entrada agrego al asiento el Id del cliente*/
                 var idAsientoABuscar = entrada.AsientoId;
          
                 if (idAsientoABuscar != null)
                 {
-                  
-                    /* No comprendo puntualmente que hace el await y como funciona pero sino lo pongo no lo considera Asiento*/
+
+                    /* al ser async estamos obligados a usar await que se refiere a tareas asincronicas
+                     https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/
+                    */
                     var asiento = await _context.Asiento.FirstOrDefaultAsync(m => m.Id == idAsientoABuscar);
 
                     if (asiento != null)
