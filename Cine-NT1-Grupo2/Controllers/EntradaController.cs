@@ -253,7 +253,9 @@ namespace Cine_NT1_Grupo2.Controllers
                 return NotFound();
             }
 
-            var funcion = await _context.Funcion.FindAsync(IdFuncion);
+            /* Por algun motivo el include no se lleva bien con 
+             * find async https://stackoverflow.com/questions/40360512/findasync-and-include-linq-statements */
+            var funcion = await _context.Funcion.Include(f =>f.Pelicula).FirstOrDefaultAsync(s => s.Id == IdFuncion);
             if (funcion == null)
             {
                 return NotFound();
