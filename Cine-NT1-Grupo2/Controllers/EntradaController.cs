@@ -56,7 +56,7 @@ namespace Cine_NT1_Grupo2.Controllers
                 return NotFound();
             }
 
-            var entrada = await _context.Entrada
+            var entrada = await _context.Entrada.Include(s =>s.Funcion).Include(s => s.Funcion.Pelicula).Include(s=> s.Asiento)
                 .FirstOrDefaultAsync(m => m.EntradaId == id);
             if (entrada == null)
             {
