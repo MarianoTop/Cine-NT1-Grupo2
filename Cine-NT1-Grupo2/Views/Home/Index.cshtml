@@ -6,31 +6,33 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">CINEMA-ORT</h1>
+    <h1 class="display-4">Nuestras Funciones</h1>
 </div>
 
 
-<div class="grid-container">
+<div class="container">
 
+    <div class="row">
 
-    @foreach (var item in Model)
-    {
-        <div class="grid-item">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm">
 
-            @{
-                var imagenPath = Url.Content("~/imagenes/" + item.Id + ".jpg");
+                @{
+                    var imagenPath = Url.Content("~/imagenes/" + item.Id + ".jpg");
 
-            }
+                }
 
-            @*https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-6.0
+                @*https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-6.0
                 asp route-id*@
-            <a asp-area="" asp-controller="Pelicula" asp-action="Details" asp-route-id="@item.Id">
-                <img src="@imagenPath" alt="@item.Nombre" height="225" width="150">
-            </a>
-            <div>
-                @Html.DisplayFor(modelItem => item.Nombre)
+                <a asp-area="" asp-controller="Pelicula" asp-action="Details" asp-route-id="@item.Id">
+                    <img src="@imagenPath" alt="@item.Nombre" height="225" width="150">
+                </a>
+                <div>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 
