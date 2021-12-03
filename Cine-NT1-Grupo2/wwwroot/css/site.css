@@ -61,7 +61,7 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    /*/background-image: url(/imagenes/fondo.png);*/
+  
       
 }
 .footer {
@@ -70,4 +70,43 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 15px; /* Vertically center the text there */
+}
+
+/* como usar grid... 
+    https://www.w3schools.com/css/css_grid.asp
+*/
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    /*padding: 20px;*/
+    font-size: 1em;
+    text-align: center;
+}
+
+.grid-containerAsientos {
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: black;
+    padding: 10px;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+.grid-itemAsiento {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    font-size: 1em;
+    text-align: left;
+    padding: 20px;
 }

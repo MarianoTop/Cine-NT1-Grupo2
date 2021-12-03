@@ -4,73 +4,82 @@
     ViewData["Title"] = "Seleccion de asiento";
 }
 
-<h1>Create</h1>
+<h1>Elegir asiento</h1>
 
 <h4>Seleccione su asiento</h4>
 <hr />
 
+<div class="grid-containerAsientos">
 
-<div>
-    <dl class="row">
+    <div class="grid-itemAsiento">
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
+        <div>
+            <dl class="row">
 
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pelicula.Nombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pelicula.Nombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pelicula.Calificacion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pelicula.Calificacion)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Pelicula.Genero)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Pelicula.Genero)
-        </dd>
-    </dl>
-    @{
-        var imagenPath = Url.Content("~/imagenes/" + Model.Pelicula.Id + ".jpg");
-
-    }
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Fecha)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Fecha)
+                </dd>
 
 
-    <img src="@imagenPath" alt="@Model.Pelicula.Nombre" height="300">
-</div>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Pelicula.Nombre)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Pelicula.Nombre)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Pelicula.Calificacion)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Pelicula.Calificacion)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Pelicula.Genero)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Pelicula.Genero)
+                </dd>
+            </dl>
+            @{
+                var imagenPath = Url.Content("~/imagenes/" + Model.Pelicula.Id + ".jpg");
+
+            }
 
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*Se le agrega la Id del model para que sea enviada por parametro*@
-            @*Se le agrega name para que se le envia con este nombre al model Create*@
-            <input type="hidden" asp-for="Id" name="FuncionId" />
-
-            @*Aca se agrega el Id del cliente para que lo reciba la accion y pueda guardarlo en entrada. Decidi que era mejor obtenerlo directamente 
-                en el metodo porque sino el usuario puede modificarlo al enviarlo desde inspeccionar.*@
-
-            @*<input type="hidden" value=@User.FindFirstValue(ClaimTypes.NameIdentifier) name="ClienteId" /> *@
+            <img src="@imagenPath" alt="@Model.Pelicula.Nombre" height="300">
+        </div>
 
 
-            @Html.DropDownList("AsientoId", ViewBag.AsientoPeli as SelectList)
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @*Se le agrega la Id del model para que sea enviada por parametro*@
+                    @*Se le agrega name para que se le envia con este nombre al model Create*@
+                    <input type="hidden" asp-for="Id" name="FuncionId" />
+
+                    @*Aca se agrega el Id del cliente para que lo reciba la accion y pueda guardarlo en entrada. Decidi que era mejor obtenerlo directamente
+                        en el metodo porque sino el usuario puede modificarlo al enviarlo desde inspeccionar.*@
+
+                    @*<input type="hidden" value=@User.FindFirstValue(ClaimTypes.NameIdentifier) name="ClienteId" /> *@
 
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                    @Html.DropDownList("AsientoId", ViewBag.AsientoPeli as SelectList)
+
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+    </div>
+
+    <div class="grid-itemAsiento">
+        <img src="~/imagenes/DistCine.jpg" alt="UbicacionCines">
     </div>
 </div>
 
