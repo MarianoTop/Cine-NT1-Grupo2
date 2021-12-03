@@ -20,7 +20,7 @@ namespace Cine_NT1_Grupo2.Models
         [Required (ErrorMessage ="Por favor, seleccione una fecha")]
         public  DateTime Fecha { get; set; }
 
-        [Required(ErrorMessage = "Por favor, seleccione una sala"), Range(1, 3, ErrorMessage = "La {0} debe estar entre 1 y 3.")]
+        [Required(ErrorMessage = "Por favor, seleccione una sala"), Range(1, 3, ErrorMessage = "La Sala debe estar entre {1} y {2}.")]
         public  int Sala { get; set; }
 
      
