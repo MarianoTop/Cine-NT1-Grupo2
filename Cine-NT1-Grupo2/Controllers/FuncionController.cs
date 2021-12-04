@@ -80,8 +80,12 @@ namespace Cine_NT1_Grupo2.Controllers
             if (ModelState.IsValid)
             {
 
-                //*** valida que la fecha sea en el dia actual o posterior.. no pueden cargarse fechas pasadas****
-                bool esfechaPrevia = _context.Funcion.Any(func => (func.Fecha <= DateTime.Today));
+                //*** valida que la fecha sea en el dia actual o posterior.. no pueden cargarse fechas pasadas. La comentada verificaria que alguna funcion en
+                //la bd sea anterior. debemos verifiar la que esta por crearse ****
+              
+                /*  bool esfechaPrevia = _context.Funcion.Any(func => (func.Fecha <= DateTime.Today));*/
+
+                bool esfechaPrevia = funcion.Fecha <= DateTime.Today;
 
                 if (esfechaPrevia)
                 {
