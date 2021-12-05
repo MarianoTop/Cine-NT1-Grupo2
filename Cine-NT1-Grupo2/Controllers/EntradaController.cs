@@ -207,6 +207,20 @@ namespace Cine_NT1_Grupo2.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var entrada = await _context.Entrada.FindAsync(id);
+
+            if (entrada != null)
+            {
+                /*Antes de eliminar la entrada busco su asiento y lo vuelvo 0 para que se pueda seleccionar */
+                var asiento = await _context.Asiento.FirstOrDefaultAsync(m => m.Id == entrada.AsientoId);
+
+                if (asiento != null)
+                {
+
+                    asiento.ClienteId = 0;
+                }
+            }
+
+
             _context.Entrada.Remove(entrada);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
