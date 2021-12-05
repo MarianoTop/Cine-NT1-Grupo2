@@ -71,6 +71,10 @@ body {
     margin-bottom: 60px;
     /*https://stackoverflow.com/questions/4997493/set-opacity-of-background-image-without-affecting-child-elements*/
     /*background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url(/imagenes/fondo.png);*/
+    background-image: url(/imagenes/fondo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
    

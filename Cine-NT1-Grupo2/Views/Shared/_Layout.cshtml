@@ -78,21 +78,25 @@
                 
                 <ul class="nav nav-pills">
                     @if (!User.Identity.IsAuthenticated)
-                     {
-                          <li class="nav-item">
-                              <a class="nav-link active" asp-area="" asp-controller="Cliente" asp-action="Loguearse">Iniciar Sesión</a>
-                          </li>
-                     }
+                    {   
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-controller="Cliente" asp-action="Loguearse">Iniciar Sesión</a>
+                        </li>
+                    }
 
-                     @if (User.Identity.IsAuthenticated)
-                      {
-                         <li class="nav-item">
-                             <form asp-controller="Cliente" asp-action="Desloguearse">
-                                 <button type="submit" class="nav-link text-danger">Cerrar Sesión</button>
-                             </form>
-                         </li>
-                      }
-                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <p class="nav-link text-white" asp-area="">Bienvenido @User.FindFirstValue(ClaimTypes.GivenName)!</p>
+                        </li>
+
+                        <li class="nav-item">
+                            <form asp-controller="Cliente" asp-action="Desloguearse">
+                                <button type="submit" class="nav-link alert-danger">Cerrar Sesión</button>
+                            </form>
+                        </li>
+                    }
+                </ul>
                 
             </div>
         </nav>
