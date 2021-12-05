@@ -6,14 +6,15 @@
     <meta name="author" content="Prado Diessler Federico Werner Nahuel- Safe Facundo Nadir- Toppino Mariano Ariel">
     <meta name="Keywords" content="CINE, Peliculas, online, entradas, estrenos, promociones">
     <title>@ViewData["Title"] - Bienvenido a CINEMA-ORT </title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
                  Cinema-ORT</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +23,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="nav nav-pills flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
 
 
@@ -35,32 +36,32 @@
                                 //ESTO ES LO QUE PUEDE VER EL ADMINISTRADOR EN EL NAV
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Asiento" asp-action="Index">Asiento</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Asiento" asp-action="Index">Asiento</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cine" asp-action="Index">Cine</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Cine" asp-action="Index">Cine</a>
                                 </li>
 
 
                             }
                             //esto es lo que puede ver el USUARIO AUTENTICADO EN EL NAV
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Entrada" asp-action="Index">Entrada</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Entrada" asp-action="Index">Entrada</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Funcion" asp-action="Index">Funciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Pelicula" asp-action="Index">Cartelera</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Cliente" asp-action="Index">Cliente</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tarjeta" asp-action="Index">Medio De Pago</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Funcion" asp-action="Index">Funciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Pelicula" asp-action="Index">Cartelera</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Tarjeta" asp-action="Index">Medio De Pago</a>
                             </li>
 
                             <li class="nav-item">
