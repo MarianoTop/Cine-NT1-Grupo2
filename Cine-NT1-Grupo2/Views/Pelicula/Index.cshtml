@@ -4,7 +4,7 @@
     ViewData["Title"] = "Inicio";
 }
 
-<h1>Peliculas en Cartelera</h1>
+<h1>Películas en Cartelera</h1>
 
 <p>
     @if (User.IsInRole(nameof(Rol.ADMIN))) // solo permite que el usuario ADMINSTRADOR tenga acceso a loc omandos de Funcion
@@ -48,14 +48,14 @@
                 {
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Ver Mas</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
                         <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
                     </td>
                 }
                 else
                 {
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Ver Mas</a> 
+                        <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> 
                     </td>
                 }
 
