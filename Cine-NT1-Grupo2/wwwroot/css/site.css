@@ -93,19 +93,23 @@ body {
 */
 
 
+.cartelera-container {
+    background-color: #e9ecef;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    background-color: #2196F3;
+
+    border-radius: 5px;
     padding: 10px;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
 }
 
 .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    /*padding: 20px;*/
+     
+    padding: 20px;
     font-size: 1em;
     text-align: center;
 }
@@ -113,14 +117,14 @@ body {
 .grid-containerAsientos {
     display: grid;
     grid-template-columns: auto auto;
-    background-color: black;
+   
     padding: 10px;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
 }
 
 .grid-itemAsiento {
-    background-color: rgba(255, 255, 255, 0.8);
+   
     border: 1px solid rgba(0, 0, 0, 0.8);
     font-size: 1em;
     text-align: left;

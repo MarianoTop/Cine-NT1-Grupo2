@@ -12,18 +12,20 @@
     </div>
 </div>
 
-<div class="text-center">
-    <h1 class="display-4">Nuestras Funciones</h1>
-</div>
 
 
-<div class="container">
 
-    <div class="row">
+<div class="cartelera-container">
+
+    <div class="text-center">
+        <h1 class="display-4">Nuestras Funciones</h1>
+    </div>
+
+    <div class="grid-container">
 
         @foreach (var item in Model)
         {
-            <div class="col-sm">
+            <div class="grid-item ">
 
                 @{
                     var imagenPath = Url.Content("~/imagenes/" + item.Id + ".jpg");
@@ -31,7 +33,7 @@
                 }
 
                 @*https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-6.0
-                asp route-id*@
+                    asp route-id*@
                 <a asp-area="" asp-controller="Pelicula" asp-action="Details" asp-route-id="@item.Id">
                     <img src="@imagenPath" alt="@item.Nombre" height="225" width="150">
                 </a>
