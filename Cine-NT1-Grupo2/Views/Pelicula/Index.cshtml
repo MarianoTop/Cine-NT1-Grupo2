@@ -47,15 +47,15 @@
                 @if (User.IsInRole(nameof(Rol.ADMIN))) // solo permite que el usuario ADMINSTRADOR tenga acceso a loc omandos de Funcion
                 {
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                        <a class="btn btn-light" role="button" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                        <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                        <a class="btn btn-danger" role="button" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
                     </td>
                 }
                 else
                 {
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> 
+                        <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.Id">Detalles</a> 
                     </td>
                 }
 

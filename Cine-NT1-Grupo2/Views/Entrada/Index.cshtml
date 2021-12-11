@@ -57,9 +57,9 @@ else
                 </td>
 
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.EntradaId">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.EntradaId">Ver Mas</a> |
-                    <a asp-action="Delete" asp-route-id="@item.EntradaId">Eliminar</a>
+                    <a class="btn btn-light" role="button" asp-action="Edit" asp-route-id="@item.EntradaId">Editar</a> 
+                    <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.EntradaId">Ver Mas</a> 
+                    <a class="btn btn-danger" role="button" asp-action="Delete" asp-route-id="@item.EntradaId">Eliminar</a>
                 </td>
             </tr>
         }

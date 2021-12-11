@@ -63,15 +63,15 @@ else
             @if (User.IsInRole(nameof(Rol.ADMIN)))
             {
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.id">Ver Mas</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id">Eliminar</a>
+                    <a class="btn btn-light" role="button" asp-action="Edit" asp-route-id="@item.id">Editar</a> 
+                    <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.id">Ver Mas</a> 
+                    <a class="btn btn-danger" role="button" asp-action="Delete" asp-route-id="@item.id">Eliminar</a>
                 </td>
  }
             else
             {
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.id"> Ver/Cambiar mis Datos</a> |                   
+                    <a class="btn btn-secondary" role="button" asp-action="Details" asp-route-id="@item.id"> Ver/Cambiar mis Datos</a>                   
                 </td>
             }
 
