@@ -127,6 +127,15 @@ namespace Cine_NT1_Grupo2.Controllers
 
                 _context.Add(entrada);
                 await _context.SaveChangesAsync();
+
+                /*Uso del viewbag para alerts... https://es.stackoverflow.com/questions/350669/alert-en-mvc-c
+                 * https://www.c-sharpcorner.com/blogs/alert-message-from-controller-view-using-javascript-alert-messagebox*/
+
+                /*Como antes hace un request a index debo usar TempData que dura mas
+                 * https://stackoverflow.com/questions/47291712/tempdata-not-displaying-success-message-asp-net-mvc */
+
+                TempData["Mensaje"] = "Creacion de entrada exitosa";
+
                 return RedirectToAction(nameof(Index));
             }
             return View(entrada);

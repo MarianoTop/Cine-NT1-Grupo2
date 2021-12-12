@@ -13,11 +13,21 @@ else
     <h1>Tus Entradas Disponibles</h1>
 }
 
+@if (TempData["Mensaje"] != null)
+{
+<script>
+
+            window.onload = function () {
+                alert("@TempData["Mensaje"]");
+            };
+
+</script>
+}
 
 
-  <p>
-          <a asp-action="Create">Nueva Entrada</a>
-  </p>
+<p>
+    <a asp-action="Create">Nueva Entrada</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -57,11 +67,13 @@ else
                 </td>
 
                 <td>
-                    <a class="btn btn-light" role="button" asp-action="Edit" asp-route-id="@item.EntradaId">Editar</a> 
-                    <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.EntradaId">Ver Mas</a> 
+                    <a class="btn btn-light" role="button" asp-action="Edit" asp-route-id="@item.EntradaId">Editar</a>
+                    <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.EntradaId">Ver Mas</a>
                     <a class="btn btn-danger" role="button" asp-action="Delete" asp-route-id="@item.EntradaId">Eliminar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
