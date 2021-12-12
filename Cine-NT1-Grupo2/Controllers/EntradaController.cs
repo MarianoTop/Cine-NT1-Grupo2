@@ -116,8 +116,11 @@ namespace Cine_NT1_Grupo2.Controllers
                      https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/
                     */
                     var asiento = await _context.Asiento.FirstOrDefaultAsync(m => m.Id == idAsientoABuscar);
+                    
+                    
+                    /*Valido 1) que el asiento este libre. 2) que el asiento pertenezca a la funcion.*/
 
-                    if (asiento.ClienteId==0)
+                    if (asiento.ClienteId==0 && asiento.FuncionId==entrada.FuncionId)
                     {
                         asiento.ClienteId = entrada.ClienteId;
                     }
