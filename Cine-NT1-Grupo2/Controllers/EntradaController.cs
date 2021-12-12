@@ -126,14 +126,13 @@ namespace Cine_NT1_Grupo2.Controllers
                     }
                     else
                     {
+                        /*Si hay un error informo el error al cliente */
                         TempData["Mensaje"] = "hubo un error, intente nuevamente";
                         return RedirectToAction(nameof(Index));
                      
                     }
                 }
-
-             
-
+                             
                 _context.Add(entrada);
                 await _context.SaveChangesAsync();
 
@@ -211,7 +210,11 @@ namespace Cine_NT1_Grupo2.Controllers
 
             var entrada = await _context.Entrada
                 .FirstOrDefaultAsync(m => m.EntradaId == id);
-            if (entrada == null)
+
+            var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            /* Valido que la entrada pertenezca a este cliente*/
+            if (entrada == null|| entrada.ClienteId!=idDelCliente)
             {
                 return NotFound();
             }
@@ -224,9 +227,12 @@ namespace Cine_NT1_Grupo2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var entrada = await _context.Entrada.FindAsync(id);
+            /*Por algun motivo no parece ser necesario validar esto. aunque el usuario cambie algo con inspeccionar sigue estando el mismo id que deberia haber */
 
-            if (entrada != null)
+            var entrada = await _context.Entrada.FindAsync(id);
+            var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            if (entrada != null && entrada.ClienteId==idDelCliente )
             {
                 /*Antes de eliminar la entrada busco su asiento y lo vuelvo 0 para que se pueda seleccionar */
                 var asiento = await _context.Asiento.FirstOrDefaultAsync(m => m.Id == entrada.AsientoId);
@@ -237,10 +243,18 @@ namespace Cine_NT1_Grupo2.Controllers
                     asiento.ClienteId = 0;
                 }
             }
+            else
+            {
+                TempData["Mensaje"] = "EY, esa entrada no le pertenece :( ";
+                return RedirectToAction(nameof(Index));
+            }
 
 
             _context.Entrada.Remove(entrada);
             await _context.SaveChangesAsync();
+
+
+            TempData["Mensaje"] = "Su entrada fue eliminada ";
             return RedirectToAction(nameof(Index));
         }
 
