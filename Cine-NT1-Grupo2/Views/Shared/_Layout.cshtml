@@ -31,20 +31,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
 
-                            @if (User.IsInRole(nameof(Rol.ADMIN)))
-                            {
-                                //ESTO ES LO QUE PUEDE VER EL ADMINISTRADOR EN EL NAV
-
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="Asiento" asp-action="Index">Asiento</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="Cine" asp-action="Index">Cine</a>
-                                </li>
-
-
-                            }
+                            
                             //esto es lo que puede ver el USUARIO AUTENTICADO EN EL NAV
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Entrada" asp-action="Index">Entrada</a>
@@ -66,11 +53,7 @@
 
                            
                         }
-                        else
-                        {
-                    
-                        }
-
+                       
                     </ul>
                 </div>
             </div>
