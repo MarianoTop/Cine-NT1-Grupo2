@@ -291,12 +291,25 @@ namespace Cine_NT1_Grupo2.Controllers
 
             /*No encontre otra manera de obtener el cliente, dado que el idCliente no es un int sino un string */
           var  cliente= await _context.Cliente.Where(s => s.id.ToString() == idCliente).FirstOrDefaultAsync();
-            
+
+            /*Desafortunadamente es la unica manera que encontre de vovler a cero los asientos */
+          var  entradasModel = await _context.Entrada.Where(s => s.ClienteId.ToString() == idCliente).Include(entrada => entrada.Funcion.Pelicula)
+                   .Include(entrada => entrada.Funcion.Asientos).ToListAsync();
+
+            foreach(var ent in entradasModel)
+            {
+                ent.Asiento.ClienteId = 0;
+            }
+
+
             _context.Cliente.Remove(cliente);
             await _context.SaveChangesAsync();
 
             /*Intente redirigir la accion pero exploto por lo que tuve que volver a copiar codigo */
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            /*Por algun motivo me indica que el viewbag es null, tuve que usar TempData */
+            TempData["MensajeHome"] = "El usuario ha sido dado de baja ";
+      
             return RedirectToAction("Index", "Home");
 
 

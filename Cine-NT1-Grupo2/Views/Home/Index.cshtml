@@ -5,6 +5,17 @@
 
 }
 
+@if (TempData["MensajeHome"] != null)
+{
+    <script>
+
+            window.onload = function () {
+                alert("@TempData["MensajeHome"]");
+            };
+
+    </script>
+}
+
 <div class="jumbotron text-center">
     <h1>Registrate para disfrutar del mejor contenido!</h1>
     <div>
