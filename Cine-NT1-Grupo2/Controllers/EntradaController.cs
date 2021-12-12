@@ -117,9 +117,15 @@ namespace Cine_NT1_Grupo2.Controllers
                     */
                     var asiento = await _context.Asiento.FirstOrDefaultAsync(m => m.Id == idAsientoABuscar);
 
-                    if (asiento != null)
+                    if (asiento.ClienteId==0)
                     {
                         asiento.ClienteId = entrada.ClienteId;
+                    }
+                    else
+                    {
+                        TempData["Mensaje"] = "hubo un error, intente nuevamente";
+                        return RedirectToAction(nameof(Index));
+                     
                     }
                 }
 
