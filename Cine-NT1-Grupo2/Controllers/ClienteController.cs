@@ -59,12 +59,29 @@ namespace Cine_NT1_Grupo2.Controllers
                 return NotFound();
             }
 
+           
+
+               
+
             var cliente = await _context.Cliente
                 .FirstOrDefaultAsync(m => m.id == id);
             if (cliente == null)
             {
                 return NotFound();
             }
+
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
+            {
+                var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                if (cliente.id != idDelCliente)
+                {
+                    return NotFound();
+                }
+
+            }
+
+
 
             return View(cliente);
         }
