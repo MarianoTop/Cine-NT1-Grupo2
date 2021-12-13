@@ -41,7 +41,15 @@ html {
   html {
     font-size: 16px;
   }
+
+  
+
 }
+
+
+
+
+
 
 .border-top {
   border-top: 1px solid #e5e5e5;
@@ -97,6 +105,9 @@ body {
     background-color: #e9ecef;
 }
 
+
+
+
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -105,6 +116,19 @@ body {
     padding: 10px;
     grid-column-gap: 10px;
     grid-row-gap: 10px;
+}
+
+ /* Esto del media debe ir despues del original porque sino se sobrescribe aparentemente*/
+@media (max-width: 600px) {
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        border-radius: 5px;
+        padding: 10px;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
 }
 
 .grid-item {
