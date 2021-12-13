@@ -123,6 +123,8 @@ namespace Cine_NT1_Grupo2.Controllers
                     if (asiento.ClienteId==0 && asiento.FuncionId==entrada.FuncionId)
                     {
                         asiento.ClienteId = entrada.ClienteId;
+                        
+
                     }
                     else
                     {
@@ -253,6 +255,7 @@ namespace Cine_NT1_Grupo2.Controllers
                     {
 
                         asiento.ClienteId = 0;
+                        _context.Update(asiento);
                     }
                 }
                 else
