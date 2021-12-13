@@ -42,9 +42,7 @@ html {
     font-size: 16px;
   }
 
-  
-
-}
+ }
 
 
 
@@ -153,4 +151,22 @@ body {
     font-size: 1em;
     text-align: left;
     padding: 20px;
+}
+.loginNavBar {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (min-width: 576px)  {
+
+    .loginNavBar {
+        max-width: 540px;
+    }
+    
 }
