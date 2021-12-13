@@ -36,47 +36,42 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.Mail)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.pass)
-            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mail)
-            </td>
-            <td>
-                @Html.HiddenFor(modelItem => item.pass)
-                @*esta linea oculta la contraseña para que no pueda ser visible en el index*@
-            </td>
-
-            @if (User.IsInRole(nameof(Rol.ADMIN)))
-            {
+            <tr>
                 <td>
-                    <a class="btn btn-light" role="button" asp-action="Edit" asp-route-id="@item.id">Editar</a> 
-                    <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.id">Ver Mas</a> 
-                    <a class="btn btn-danger" role="button" asp-action="Delete" asp-route-id="@item.id">Eliminar</a>
+                    @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
- }
-            else
-            {
                 <td>
-                    <a class="btn btn-secondary" role="button" asp-action="Details" asp-route-id="@item.id"> Ver/Cambiar mis Datos</a>                   
+                    @Html.DisplayFor(modelItem => item.Apellido)
                 </td>
-            }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mail)
+                </td>
 
 
-        </tr>
+                @if (User.IsInRole(nameof(Rol.ADMIN)))
+                {
+                    <td>
+                        <a class="btn btn-light" role="button" asp-action="Edit" asp-route-id="@item.id">Editar</a> |
+                        <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.id">Ver Mas</a> |
+                        <a class="btn btn-danger" role="button" asp-action="Delete" asp-route-id="@item.id">Eliminar</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a class="btn btn-secondary" role="button" asp-action="Details" asp-route-id="@item.id"> Ver/Cambiar mis Datos</a>
+                    </td>
+                }
+
+
+            </tr>
 
         }
     </tbody>
