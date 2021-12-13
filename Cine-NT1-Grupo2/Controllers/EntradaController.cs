@@ -211,10 +211,18 @@ namespace Cine_NT1_Grupo2.Controllers
             var entrada = await _context.Entrada
                 .FirstOrDefaultAsync(m => m.EntradaId == id);
 
-            var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
+            {
+                var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            /* Valido que la entrada pertenezca a este cliente*/
-            if (entrada == null|| entrada.ClienteId!=idDelCliente)
+                /* Valido que la entrada pertenezca a este cliente*/
+                if (entrada == null || entrada.ClienteId != idDelCliente)
+                {
+                    return NotFound();
+                }
+
+            }
+            else if (entrada == null)
             {
                 return NotFound();
             }
@@ -230,32 +238,60 @@ namespace Cine_NT1_Grupo2.Controllers
             /*Por algun motivo no parece ser necesario validar esto. aunque el usuario cambie algo con inspeccionar sigue estando el mismo id que deberia haber */
 
             var entrada = await _context.Entrada.FindAsync(id);
-            var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            if (entrada != null && entrada.ClienteId==idDelCliente )
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
             {
-                /*Antes de eliminar la entrada busco su asiento y lo vuelvo 0 para que se pueda seleccionar */
-                var asiento = await _context.Asiento.FirstOrDefaultAsync(m => m.Id == entrada.AsientoId);
 
-                if (asiento != null)
+                var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                if (entrada != null && entrada.ClienteId == idDelCliente)
                 {
+                    /*Antes de eliminar la entrada busco su asiento y lo vuelvo 0 para que se pueda seleccionar */
+                    var asiento = await _context.Asiento.FirstOrDefaultAsync(m => m.Id == entrada.AsientoId);
 
-                    asiento.ClienteId = 0;
+                    if (asiento != null)
+                    {
+
+                        asiento.ClienteId = 0;
+                    }
                 }
+                else
+                {
+                    TempData["Mensaje"] = "EY, esa entrada no le pertenece :( ";
+                    return RedirectToAction(nameof(Index));
+                }
+
+
+                _context.Entrada.Remove(entrada);
+                await _context.SaveChangesAsync();
+
+
+                TempData["Mensaje"] = "Su entrada fue eliminada ";
+                return RedirectToAction(nameof(Index));
             }
             else
             {
-                TempData["Mensaje"] = "EY, esa entrada no le pertenece :( ";
+
+                if (entrada != null)
+                {
+                    /*Antes de eliminar la entrada busco su asiento y lo vuelvo 0 para que se pueda seleccionar */
+                    var asiento = await _context.Asiento.FirstOrDefaultAsync(m => m.Id == entrada.AsientoId);
+
+                    if (asiento != null)
+                    {
+
+                        asiento.ClienteId = 0;
+                    }
+                }
+
+
+                _context.Entrada.Remove(entrada);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
 
-
-            _context.Entrada.Remove(entrada);
-            await _context.SaveChangesAsync();
-
-
-            TempData["Mensaje"] = "Su entrada fue eliminada ";
-            return RedirectToAction(nameof(Index));
+                
         }
 
         private bool EntradaExists(int id)
