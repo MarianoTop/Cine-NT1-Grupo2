@@ -203,6 +203,22 @@ namespace Cine_NT1_Grupo2.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var cliente = await _context.Cliente.FindAsync(id);
+
+            if (cliente != null)
+            {
+
+                /*Antes de borrar al cliente seteo los asientos en 0 de sus entradas */
+                var entradasModel = await _context.Entrada.Where(s => s.ClienteId.ToString() == cliente.id.ToString()).Include(entrada => entrada.Funcion.Pelicula)
+                 .Include(entrada => entrada.Funcion.Asientos).ToListAsync();
+
+                foreach (var ent in entradasModel)
+                {
+                    ent.Asiento.ClienteId = 0;
+                }
+            }
+
+
+
             _context.Cliente.Remove(cliente);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
