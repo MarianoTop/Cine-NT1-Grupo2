@@ -150,57 +150,8 @@ namespace Cine_NT1_Grupo2.Controllers
             }
             return View(entrada);
         }
-
-        // GET: Entrada/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var entrada = await _context.Entrada.FindAsync(id);
-            if (entrada == null)
-            {
-                return NotFound();
-            }
-            return View(entrada);
-        }
-
-        // POST: Entrada/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EntradaId")] Entrada entrada)
-        {
-            if (id != entrada.EntradaId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(entrada);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EntradaExists(entrada.EntradaId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(entrada);
-        }
+             
+       
 
         // GET: Entrada/Delete/5
         public async Task<IActionResult> Delete(int? id)
