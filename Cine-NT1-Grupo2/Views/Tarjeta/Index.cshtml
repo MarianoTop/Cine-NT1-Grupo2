@@ -4,11 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Medios de Pago </h1>
+@if (User.IsInRole(nameof(Rol.ADMIN)))
+{
+    <h1>Tarjetas registradas</h1>
+}
+else
+{
+    <h1>Datos de tus tarjetas</h1>
+    <p>
+        <a asp-action="Create">Agregar una Tarjeta</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create">Agregar una Tarjeta</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -28,26 +35,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <th>
-                @Html.DisplayFor(modelItem => item.Numero)
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaDeVencimiento)
-            </td>
-            <td>
-                @Html.HiddenFor(modelItem => item.CodigoSeguridad) @*oculta el codigo de seguridad para que no sea visible*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                <a class="btn btn-light" role="button" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
-                <a class="btn btn-danger" role="button" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaDeVencimiento)
+                </td>
+                <td>
+                    @Html.HiddenFor(modelItem => item.CodigoSeguridad) @*oculta el codigo de seguridad para que no sea visible*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                @if (User.IsInRole(nameof(Rol.ADMIN)))
+                {
+                    <td>
+                        <a class="btn btn-light" role="button" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                        <a class="btn btn-light" role="button" asp-action="Details" asp-route-id="@item.Id">Ver Mas</a> |
+                        <a class="btn btn-danger" role="button" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a class="btn btn-secondary" role="button" asp-action="Details" asp-route-id="@item.Id">Ver</a>
+                        <a class="btn btn-danger" role="button" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                }
+            </tr>
+        }
     </tbody>
 </table>

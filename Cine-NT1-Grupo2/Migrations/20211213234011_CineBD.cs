@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cine_NT1_Grupo2.Migrations
 {
-    public partial class _10 : Migration
+    public partial class CineBD : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,7 +46,7 @@ namespace Cine_NT1_Grupo2.Migrations
                     Nombre = table.Column<string>(maxLength: 20, nullable: false),
                     Apellido = table.Column<string>(maxLength: 20, nullable: false),
                     Mail = table.Column<string>(maxLength: 20, nullable: false),
-                    pass = table.Column<string>(maxLength: 20, nullable: false),
+                    pass = table.Column<string>(nullable: true),
                     Rol = table.Column<int>(nullable: false),
                     CineId = table.Column<int>(nullable: true)
                 },
@@ -85,17 +85,17 @@ namespace Cine_NT1_Grupo2.Migrations
                     FechaDeVencimiento = table.Column<DateTime>(nullable: false),
                     CodigoSeguridad = table.Column<int>(nullable: false),
                     Nombre = table.Column<string>(maxLength: 30, nullable: false),
-                    Clienteid = table.Column<int>(nullable: true)
+                    ClienteId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tarjeta", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tarjeta_Cliente_Clienteid",
-                        column: x => x.Clienteid,
+                        name: "FK_Tarjeta_Cliente_ClienteId",
+                        column: x => x.ClienteId,
                         principalTable: "Cliente",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,9 +189,9 @@ namespace Cine_NT1_Grupo2.Migrations
                 column: "IdPelicula");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tarjeta_Clienteid",
+                name: "IX_Tarjeta_ClienteId",
                 table: "Tarjeta",
-                column: "Clienteid");
+                column: "ClienteId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Entrada_Funcion_FuncionId",

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cine_NT1_Grupo2.Migrations
 {
     [DbContext(typeof(CineContext))]
-    [Migration("20211128183008_1.0")]
-    partial class _10
+    [Migration("20211213234011_CineBD")]
+    partial class CineBD
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,9 +100,7 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("pass")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
@@ -196,7 +194,7 @@ namespace Cine_NT1_Grupo2.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Clienteid")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<int>("CodigoSeguridad")
@@ -215,7 +213,7 @@ namespace Cine_NT1_Grupo2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Clienteid");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Tarjeta");
                 });
@@ -279,7 +277,9 @@ namespace Cine_NT1_Grupo2.Migrations
                 {
                     b.HasOne("Cine_NT1_Grupo2.Models.Cliente", null)
                         .WithMany("tarjetas")
-                        .HasForeignKey("Clienteid");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Cine_NT1_Grupo2.Models
@@ -33,7 +34,10 @@ namespace Cine_NT1_Grupo2.Models
         //valida que el nombre sea en caracteres alfabeticos
         [Required(ErrorMessage = "Por favor, ingrese el nombre del titular de la tarjeta"), MaxLength(30)]
         [RegularExpression("[a-z A-Z ]*", ErrorMessage="el campo {0} no admite numeros")]
-        public string Nombre { get; set; } 
+        public string Nombre { get; set; }
+
+        [ForeignKey(nameof(Cliente))]
+        public int ClienteId { get; set; }
         /*
        private int numero;
        private DateTime fechaDeVencimiento;

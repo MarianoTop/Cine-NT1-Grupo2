@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Cine_NT1_Grupo2.Context;
 using Cine_NT1_Grupo2.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Cine_NT1_Grupo2.Controllers
 {
@@ -24,8 +27,23 @@ namespace Cine_NT1_Grupo2.Controllers
 
         // GET: Tarjeta
         public async Task<IActionResult> Index()
+
         {
-            return View(await _context.Tarjeta.ToListAsync());
+            List<Tarjeta> tarjetaDevolver;
+
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
+            {
+                var idCliente = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+
+                tarjetaDevolver = await _context.Tarjeta.Where(s => s.ClienteId.ToString() == idCliente).ToListAsync();
+            }
+            else
+            {
+                tarjetaDevolver = await _context.Tarjeta.ToListAsync();
+            }
+
+
+            return View(tarjetaDevolver);
         }
 
         // GET: Tarjeta/Details/5
@@ -59,6 +77,10 @@ namespace Cine_NT1_Grupo2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id, Numero ,FechaDeVencimiento,CodigoSeguridad,Nombre")] Tarjeta tarjeta)
         {
+
+            var texto = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            tarjeta.ClienteId = (int)Int64.Parse(texto);
 
             if (ModelState.IsValid)
             {
