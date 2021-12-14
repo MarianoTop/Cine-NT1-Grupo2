@@ -26,9 +26,6 @@ else
                 @Html.DisplayNameFor(model => model.FechaDeVencimiento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodigoSeguridad)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th></th>
@@ -43,9 +40,6 @@ else
                 </th>
                 <td>
                     @Html.DisplayFor(modelItem => item.FechaDeVencimiento)
-                </td>
-                <td>
-                    @Html.HiddenFor(modelItem => item.CodigoSeguridad) @*oculta el codigo de seguridad para que no sea visible*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
