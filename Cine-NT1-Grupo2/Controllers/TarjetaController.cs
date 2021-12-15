@@ -61,6 +61,17 @@ namespace Cine_NT1_Grupo2.Controllers
                 return NotFound();
             }
 
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
+            {
+                var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                if (tarjeta.ClienteId != idDelCliente)
+                {
+                    return NotFound();
+                }
+
+            }
+
             return View(tarjeta);
         }
 
@@ -111,11 +122,25 @@ namespace Cine_NT1_Grupo2.Controllers
                 return NotFound();
             }
 
-            var tarjeta = await _context.Tarjeta.FindAsync(id);
+            var tarjeta = await _context.Tarjeta
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (tarjeta == null)
             {
                 return NotFound();
             }
+
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
+            {
+                var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                if (tarjeta.ClienteId != idDelCliente)
+                {
+                    return NotFound();
+                }
+
+            }
+
             return View(tarjeta);
         }
 
