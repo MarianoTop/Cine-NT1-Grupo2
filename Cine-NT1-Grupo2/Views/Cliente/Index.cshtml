@@ -4,6 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
+@if (TempData["MensajeCliente"] != null)
+{
+    <script>
+
+            window.onload = function () {
+                alert("@TempData["MensajeCliente"]");
+            };
+
+    </script>
+}
+
+
 @if (User.IsInRole(nameof(Rol.ADMIN))) // solo permite que el usuario ADMINSTRADOR tenga acceso a loc omandos de Funcion
 {
     <h1>Clientes Registrados</h1>

@@ -148,11 +148,29 @@ namespace Cine_NT1_Grupo2.Controllers
                 return NotFound();
             }
 
+
             var cliente = await _context.Cliente.FindAsync(id);
-            if (cliente == null)
+
+            
+
+                if (cliente == null)
             {
                 return NotFound();
             }
+
+
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
+            {
+                var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                if (cliente.id != idDelCliente)
+                {
+                    return NotFound();
+                }
+
+            }
+
+
             return View(cliente);
         }
 
@@ -164,6 +182,21 @@ namespace Cine_NT1_Grupo2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,Nombre,Apellido,Mail,pass")] Cliente cliente)
         {
+
+            if (User.FindFirstValue(ClaimTypes.Role).ToString() != Rol.ADMIN.ToString())
+            {
+                var idDelCliente = (int)Int64.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                if (cliente.id != idDelCliente)
+                {
+                    
+                    TempData["MensajeCliente"] = "hubo un error, intente nuevamente";
+                    return RedirectToAction(nameof(Index));
+                }
+
+            }
+
+
             if (id != cliente.id)
             {
                 return NotFound();
@@ -171,6 +204,30 @@ namespace Cine_NT1_Grupo2.Controllers
 
             if (ModelState.IsValid)
             {
+
+                bool mailExiste = _context.Cliente.Any(c => c.Mail == cliente.Mail);
+
+                if (mailExiste)
+                {
+                                        
+                    ModelState.AddModelError("Mail", "Ya existe un usuario con este mail");
+
+                    return View(cliente);
+                }
+               
+                if (seguridad.validarPass(cliente.pass))
+                {
+                    /* Sino lo aclaro lo modifica a 0*/
+                    cliente.Rol = Rol.USUARIO;
+                                      
+                }
+                else
+                {
+                    ModelState.AddModelError("", "contraseña NO VALIDA: NO puede estar vacia, ser menor a 8 caracteres y debe contener una mayuscula una minúscula y un numero");
+                    return View(cliente);
+                }
+
+
                 try
                 {
                     _context.Update(cliente);
@@ -196,6 +253,10 @@ namespace Cine_NT1_Grupo2.Controllers
         [Authorize(Roles = nameof(Rol.ADMIN))]
         public async Task<IActionResult> Delete(int? id)
         {
+
+
+
+
             if (id == null)
             {
                 return NotFound();
