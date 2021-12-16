@@ -68,8 +68,9 @@ button.accept-policy {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    
 }
 
 body {
@@ -81,6 +82,9 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    
+    /*Se modifica la font */
+    font-family: 'Bakbak One', cursive !important;
 }
 
    
